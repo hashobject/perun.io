@@ -3,7 +3,7 @@
   :resource-paths #{"resources"}
   :dependencies '[[hiccup "1.0.5"]
                   [perun "0.1.3-SNAPSHOT"]
-                  [hashobject/boot-s3 "0.1.0-SNAPSHOT"]
+                  [hashobject/boot-s3 "0.1.3-SNAPSHOT"]
                   [clj-time "0.9.0"]
                   [pandeiro/boot-http "0.6.3-SNAPSHOT"]
                   [org.martinklepsch/boot-gzip "0.1.1"]])
@@ -23,15 +23,20 @@
     :source "target/public/"
     :options {"Cache-Control" "max-age=315360000, no-transform, public"}})
 
+(deftask build-dev
+  "Build dev version"
+  []
+  (comp (collection :renderer 'io.perun.site/render :page "index.html")))
+
 (deftask build
   "Build perun.io."
-  [d dev  bool "Don't build rss, sitemap, deploy to S3"]
-  (comp (collection :renderer 'io.perun.site/render :page "index.html")
-        ;(if dev identity (gzip :regex [#".html$" #".css$" #".js$"]))
-        (if dev identity (s3-sync))))
+  []
+  (comp (build-dev)
+        (gzip :regex [#".html$" #".css$" #".js$"])
+        (s3-sync)))
 
 (deftask dev
   []
   (comp (watch)
-        (build :dev true)
+        (build-dev)
         (serve :resource-root "public")))

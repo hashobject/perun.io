@@ -1,0 +1,19 @@
+body {
+  background: url("/images/bg.jpeg") #0a1818;
+  -webkit-background-size: 100%;
+  background-size: 100%;
+  background-repeat: no-repeat;
+}
+.hero {
+  text-align: center;
+  margin-top: 20%;
+  font-family: 'Bevan', cursive;
+  color: white;
+}
+
+.hero h1 {
+  font-size: 3em;
+}
+.hero p {
+  font-size: 1.5em;
+}

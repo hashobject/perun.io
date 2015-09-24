@@ -1,5 +1,5 @@
 # perun.io
-Static site generation build with Clojure and Boot
+Composable static site generator build with Clojure and Boot.
 
 ## Content License
 

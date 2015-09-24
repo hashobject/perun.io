@@ -2,12 +2,16 @@
   (:use [hiccup.core :only (html)]
         [hiccup.page :only (html5 include-css include-js)]))
 
-(defn render [posts]
+(defn render [global-meta posts]
   (html5 {:lang "en"}
     [:head
       [:meta {:charset "utf-8"}]
       [:meta {:http-equiv "X-UA-Compatible" :content "IE=edge,chrome=1"}]
       [:meta {:name "viewport" :content "width=device-width, initial-scale=1.0, user-scalable=no"}]
-      [:meta {:itemprop "author" :name "author" :content "hashobject (team@hashobject.com)"}]]
+      [:meta {:itemprop "author" :name "author" :content "hashobject (team@hashobject.com)"}]
+      [:link {:rel "stylesheet" :href "/index.css"}]
+      [:link {:href "http://fonts.googleapis.com/css?family=Bevan" :rel "stylesheet" :type "text/css"}]]
     [:body
-       [:div "Hello world"]]))
+       [:div.hero
+        [:h1 "Perun"]
+        [:p "Composable static site generator build with Clojure and Boot"]]]))
