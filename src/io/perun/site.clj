@@ -7,6 +7,7 @@
     [:head
       [:meta {:charset "utf-8"}]
       [:meta {:http-equiv "X-UA-Compatible" :content "IE=edge,chrome=1"}]
+      [:title "Perun: composable static site generator build with Clojure and Boot"]
       [:meta {:name "viewport" :content "width=device-width, initial-scale=1.0, user-scalable=no"}]
       [:meta {:itemprop "author" :name "author" :content "hashobject (team@hashobject.com)"}]
       [:link {:rel "stylesheet" :href "/index.css"}]
@@ -14,4 +15,19 @@
     [:body
        [:div.hero
         [:h1 "Perun"]
-        [:p "Composable static site generator build with Clojure and Boot"]]]))
+        [:p "Composable static site generator build with Clojure and Boot"]]
+      [:section.docs-section
+        [:h2 "Plugins"]
+        [:p "Perun comes with a set of bundled plugins but what important is that you can also
+             use Boot plugins and easily create your own."]
+        [:p "Here is the list of the current plugins:"]
+        [:ul.plugins
+          (map (fn [plugin]
+            [:li.plugin
+              [:p.plugin-title (:name plugin)]
+              [:p.plugin-description (:description plugin)]
+            ]
+            ) (:plugins global-meta))
+        ]
+      ]
+      ]))

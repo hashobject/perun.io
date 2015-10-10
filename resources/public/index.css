@@ -1,19 +1,55 @@
+html {
+}
 body {
   background: url("/images/bg.jpeg") #0a1818;
   -webkit-background-size: 100%;
   background-size: 100%;
   background-repeat: no-repeat;
+  color: white;
 }
 .hero {
   text-align: center;
-  margin-top: 20%;
   font-family: 'Bevan', cursive;
-  color: white;
+  height: 100vh;
+  min-height: 100vh;
+  margin: 0;
+  padding: 0;
 }
 
 .hero h1 {
+  margin-top: 20%;
   font-size: 3em;
 }
 .hero p {
   font-size: 1.5em;
+}
+
+section.docs-section {
+  margin: 0 auto;
+  max-width: 800px;
+  padding: 0;
+}
+
+section.docs-section h1,
+section.docs-section h2,
+section.docs-section h3 {
+  text-align: center;
+}
+
+.plugins {
+  padding: 0;
+}
+
+.plugins .plugin {
+  text-align: left;
+  background-color: white;
+  color: black;
+  padding: 20px;
+  border: 1px solid #0a1818;
+  border-radius: 2px;
+}
+
+.plugins .plugin .plugin-title {
+  text-transform: uppercase;
+  font-family: 'Bevan', cursive;
 }
