@@ -11,11 +11,15 @@
       [:meta {:name "viewport" :content "width=device-width, initial-scale=1.0, user-scalable=no"}]
       [:meta {:itemprop "author" :name "author" :content "hashobject (team@hashobject.com)"}]
       [:link {:rel "stylesheet" :href "/index.css"}]
-      [:link {:href "http://fonts.googleapis.com/css?family=Bevan" :rel "stylesheet" :type "text/css"}]]
+      [:link {:href "https://fonts.googleapis.com/css?family=Bevan" :rel "stylesheet" :type "text/css"}]
+      [:link {:href "https://cdnjs.cloudflare.com/ajax/libs/github-fork-ribbon-css/0.1.1/gh-fork-ribbon.min.css" :rel "stylesheet" :type "text/css"}]]
     [:body
-       [:div.hero
+      [:div.hero
         [:h1 "Perun"]
         [:p "Composable static site generator build with Clojure and Boot"]]
+      [:div.github-fork-ribbon-wrapper.right
+        [:div.github-fork-ribbon
+          [:a {:href "https://github.com/hashobject/perun"} "Star on GitHub"]]]
       [:section.docs-section
         [:h2 "Plugins"]
         [:p "Perun comes with a set of bundled plugins but what important is that you can also
