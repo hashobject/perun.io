@@ -29,9 +29,6 @@
           (map (fn [plugin]
             [:li.plugin
               [:p.plugin-title (:name plugin)]
-              [:p.plugin-description (:description plugin)]
-            ]
+              [:p.plugin-description (:description plugin)]]
             ) (:plugins global-meta))
-        ]
-      ]
-      ]))
+        ]]]))

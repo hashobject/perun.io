@@ -35,7 +35,8 @@
   []
   (comp (build-dev)
         (gzip :regex [#".html$" #".css$" #".js$"])
-        (s3-sync)))
+        ;(s3-sync)
+        ))
 
 (deftask dev
   []
