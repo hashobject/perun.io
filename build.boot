@@ -2,7 +2,7 @@
   :source-paths #{"src"}
   :resource-paths #{"resources"}
   :dependencies '[[hiccup "1.0.5"]
-                  [perun "0.1.3-SNAPSHOT"]
+                  [perun "0.2.1-SNAPSHOT"]
                   [hashobject/boot-s3 "0.1.2-SNAPSHOT"]
                   [clj-time "0.9.0"]
                   [pandeiro/boot-http "0.6.3-SNAPSHOT"]
@@ -28,6 +28,7 @@
   []
   (comp (global-metadata)
         (base)
+        (markdown)
         (collection :renderer 'io.perun.site/render :page "index.html")))
 
 (deftask build

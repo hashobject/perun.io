@@ -16,9 +16,8 @@ body {
   padding: 0;
 }
 
-.hero h1 {
+.hero img {
   margin-top: 20%;
-  font-size: 3em;
 }
 .hero p {
   font-size: 1.5em;
