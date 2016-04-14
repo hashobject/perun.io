@@ -2,10 +2,10 @@
   :source-paths #{"src"}
   :resource-paths #{"resources"}
   :dependencies '[[hiccup "1.0.5"]
-                  [perun "0.2.1-SNAPSHOT"]
-                  [hashobject/boot-s3 "0.1.2-SNAPSHOT"]
                   [clj-time "0.9.0"]
-                  [pandeiro/boot-http "0.6.3-SNAPSHOT"]
+                  [perun "0.3.0"]
+                  [hashobject/boot-s3 "0.1.2-SNAPSHOT"]
+                  [pandeiro/boot-http "0.7.3"]
                   [org.martinklepsch/boot-gzip "0.1.1"]])
 
 (require '[io.perun :refer :all]
