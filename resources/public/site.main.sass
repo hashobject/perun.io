@@ -1,0 +1,36 @@
+@import "tachyons"
+
+$blue: #0074D9
+$code-bg: hsla(0, 0%, 97%, 0.80)
+$code-border: hsla(0, 0%, 90%, 0.80)
+
+$fill-a: #DCF9BB
+$fill-b: #EF81E7
+$fill-c: #465292
+
+div.md
+  a
+    font-weight: 600
+    text-decoration: none
+    color: $blue
+  pre
+    padding: 1rem
+    background-color: $code-bg
+    border-radius: 3px
+    overflow-x: scroll
+    code
+      background-color: transparent
+      padding: 0
+  code
+    padding: .2em .4em
+    background-color: $code-bg
+    border-radius: 3px
+    font-size: .8em
+  blockquote
+    background: 1px solid $code-bg
+    background-color: transparentize($fill-a, .6)
+    padding: .5rem 1.5rem
+    margin: 0
+    border-radius: 5px
+    code
+      border: 1px solid $code-border
