@@ -1,33 +1,29 @@
-{
-  :base-url "https://perun.io"
-  :plugins [
-    {:name "markdown"
-    :description "parse mardown files with YAML metadata"}
-    {:name "global-metadata"
-    :description "read global metadata from edn file. Default to perun.base.edn"}
-    {:name "collections"
-    :description "generate page that takes all posts data as parameter"}
-    {:name "drafts"
-    :description "exclude pages that have :draft flag"}
-    {:name "time-to-read"
-    :description "calculate time to read for each page (available under :ttr key)"}
-    {:name "sitemap"
-    :description "generate sitemap for site"}
-    {:name "rss"
-    :description "generate RSS feed"}
-    {:name "atom-feed"
-    :description "generate Atom feed"}
-    {:name "slugs"
-    :description "generate slugs based on any property (available under :slug key)"}
-    {:name "build-date"
-    :description "add :build-date to global meta and each file meta"}
-    {:name "permalink"
-    :description "create permalink for each page"}
-    {:name "canonical-url"
-    :description "create canonical-url for each page"}
-    {:name "gravatar"
-    :description "find gravatar urls using emails"}
-    {:name "rendering to any format"
-    :description "flexible rendering"}
-  ]
-}
+{:base-url "https://perun.io"
+ :plugins [{:name "markdown"
+            :description "parse mardown files with YAML metadata"}
+           {:name "global-metadata"
+            :description "read global metadata from edn file. Default to perun.base.edn"}
+           {:name "collections"
+            :description "generate page that takes all posts data as parameter"}
+           {:name "drafts"
+            :description "exclude pages that have :draft flag"}
+           {:name "time-to-read"
+            :description "calculate time to read for each page (available under :ttr key)"}
+           {:name "sitemap"
+            :description "generate sitemap for site"}
+           {:name "rss"
+            :description "generate RSS feed"}
+           {:name "atom-feed"
+            :description "generate Atom feed"}
+           {:name "slugs"
+            :description "generate slugs based on any property (available under :slug key)"}
+           {:name "build-date"
+            :description "add :build-date to global meta and each file meta"}
+           {:name "permalink"
+            :description "create permalink for each page"}
+           {:name "canonical-url"
+            :description "create canonical-url for each page"}
+           {:name "gravatar"
+            :description "find gravatar urls using emails"}
+           {:name "rendering to any format"
+            :description "flexible rendering"}]}
