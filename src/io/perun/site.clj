@@ -60,7 +60,7 @@
 (def slogan "Programmable static site generator built with Clojure and Boot")
 
 (defn footer []
-  [:footer.bg-near-white.pa5.pa6-l.mt5.dt-l.w-100.lh-copy
+  [:footer.bg-near-white.pv5.ph3.pa6-ns.mt5.dt-l.w-100.lh-copy
    [:div.dtc-l [:b "Perun"] " is a project by "
     [:span.dim "Anton Podviaznikov"] ", "
     [:span.dim "Juho Teperi"] " & "
@@ -78,7 +78,7 @@
      [:link {:rel "icon" :type "image/png" :href "/images/48.png" :sizes "48x48"}]
      [:link {:rel "icon" :type "image/png" :href "/images/128.png" :sizes "128x128"}]
      [:link {:rel "icon" :type "image/png" :href "/images/256.png" :sizes "256x256"}]
-     [:style ".stroked {stroke-width: 24px}"]
+     [:link {:href "https://fonts.googleapis.com/css?family=Fira+Sans:400,700" :rel "stylesheet" :type "text/css"}]
      (include-css "/site.main.css")]
     [:body
      contents
@@ -91,10 +91,10 @@
      [:div.mw8.center.pv7.cf
       [:div.fl
        [:div.ph3
-        [:h1.f1 "Perun" [:span.f5.fw5.ml3.dn slogan]]
-        [:p.mv4 slogan]]
+        [:h1.f1.ma0 "Perun" [:span.f5.fw5.ml3.dn slogan]]
+        [:p.mv3 slogan]]
        (nav)]
-      [:div.fr.pr6.pt4
+      [:div.f7.pr6.pt4
        (perun-logo 300)]]
 
      [:div.mw8.center.ph3
