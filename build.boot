@@ -1,6 +1,6 @@
 (set-env!
   :source-paths #{"src"}
-  :resource-paths #{"resources"}
+  :resource-paths #{"resources" "guides"}
   :dependencies '[[hiccup "1.0.5"]
                   [clj-time "0.9.0"]
                   [perun "0.3.0"]
@@ -28,10 +28,15 @@
 (deftask build-dev
   "Build dev version"
   []
-  (comp (global-metadata)
-        (base)
-        (markdown)
-        (collection :renderer 'io.perun.site/render :page "index.html")))
+  (let [guide? (fn [e] (= "guide" (:type e)))]
+    (comp (sass)
+          (global-metadata)
+          (base)
+          (markdown)
+          (permalink :permalink-fn (fn [e] (str (:short-filename e) ".html")) :filterer :content)
+          (render :renderer 'io.perun.site/guide-page :filterer guide?)
+          (collection :renderer 'io.perun.site/render :page "index.html")
+          (collection :renderer 'io.perun.site/guides :page "guides.html" :filterer guide?))))
 
 (deftask build
   "Build perun.io."
