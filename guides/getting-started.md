@@ -13,7 +13,7 @@ knowledge except for the very basics of programming with Clojure.
 > issue or join the `#perun` channel in the http://clojurians.net
 > Slack group. We are happy to help.
 
-### Step 1: Install Boot
+## Step 1: Install Boot
 
 [Boot][boot] is a tool to help authoring Clojure projects.  It
 downloads dependencies and can build your project. Also [Perun][perun]
@@ -23,7 +23,7 @@ Installation instructions can be found in Boot's
 [Readme][boot-install]. If you already have Boot installed make sure
 you're using the latest version (`boot -u`).
 
-### Step 2: Create a new directory & add a `build.boot` file
+## Step 2: Create a new directory & add a `build.boot` file
 
 > Note: This tutorial will assume a UNIX-like system (i.e. Linux/Mac), if you're using
 > windows you can either look up the respective commands or try using the Explorer for basic tasks.
@@ -57,7 +57,7 @@ BOOT_VERSION=2.5.5
 BOOT_EMIT_TARGET=no
 ```
 
-### Step 3: The Simplest Thing Possible &trade;
+## Step 3: The Simplest Thing Possible &trade;
 
 Now let's create the simplest website possible: a single page with some text on it.
 
@@ -301,7 +301,7 @@ Admittedly it is a very basic website but let's recap what we've done:
 1. Because an HTML file is generated for each Markdown file it's
    trivial to add new pages.
 
-### Step 4: Adding more pages and a real server
+## Step 4: Adding more pages and a real server
 
 Let's add an about page by adding the file `content/about.markdown`:
 
