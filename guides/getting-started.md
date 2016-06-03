@@ -4,6 +4,7 @@ type: guide
 description: This guide covers all the basics. Set up your first project and render some HTML.
 icon: spaceship
 index: 0
+complete: true
 ---
 This guide is intended to introduce programming beginners to making
 websites, in particular static websites. It aims to assume little prior
