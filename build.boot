@@ -5,6 +5,7 @@
                   [perun "0.3.0"]
                   [confetti "0.1.2-SNAPSHOT"]
                   [deraen/boot-sass "0.2.1"]
+                  [org.slf4j/slf4j-nop "1.7.13" :scope "test"]
                   [pandeiro/boot-http "0.7.3"]
                   [org.martinklepsch/boot-gzip "0.1.1"]])
 
