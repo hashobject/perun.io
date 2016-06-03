@@ -146,19 +146,31 @@
      [:div.mt2 (nav)]]
     [:div.ph3.mt5 contents]]))
 
+(defn edit-link [post]
+  (str "https://github.com/hashobject/perun.io/edit/new/guides/" (:path post)))
+
 (defn guide-page [{global-meta :meta post :entry}]
   (with-top-nav
     [:div
      [:h1.dib.ma0.pr2 (:title post)]
-     [:a.no-underline {:href "/"} "edit"]]
+     [:a.no-underline {:href (edit-link post)} "edit"]]
     [:div.md (:content post)]))
 
 (defn guides [{global-meta :meta guides :entries}]
   (with-top-nav
     (for [g (sort-by :index guides)]
-      [:a.dt.pv3.mv3.no-underline
-       {:href (str "/" (:permalink g))}
-       [:div.dtc.pv1 (icon (:icon g))]
-       [:div.dtc.pl4.black.v-top
-        [:h2.ma0 (:title g)]
-        [:p (:description g)]]])))
+      (if (:complete g)
+        [:a.dt.pv3.mv3.no-underline
+         {:href (str "/" (:permalink g))}
+         [:div.dtc.pv1 (icon (:icon g))]
+         [:div.dtc.pl4.black.v-top
+          [:h2.ma0 (:title g)]
+          [:p (:description g)]]]
+        [:div.dt.pv3.mv3
+         {:style "opacity:0.5"}
+         [:div.dtc.pv1 (icon (:icon g))]
+         [:div.dtc.pl4.v-top
+          [:div
+           [:h2.dib.mv0.mr3 (:title g)]
+           [:span "TBD"]]
+          [:p (:description g)]]]))))
