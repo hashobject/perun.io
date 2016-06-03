@@ -2,9 +2,7 @@
   :source-paths #{"src"}
   :resource-paths #{"resources" "guides"}
   :dependencies '[[hiccup "1.0.5"]
-                  [clj-time "0.9.0"]
                   [perun "0.3.0"]
-                  ;; [hashobject/boot-s3 "0.1.2-SNAPSHOT"]
                   [confetti "0.1.2-SNAPSHOT"]
                   [deraen/boot-sass "0.2.1"]
                   [pandeiro/boot-http "0.7.3"]
@@ -14,7 +12,6 @@
          '[deraen.boot-sass :refer [sass]]
          '[pandeiro.boot-http :refer [serve]]
          '[confetti.boot-confetti :refer [create-site sync-bucket]]
-         ;; '[hashobject.boot-s3 :refer :all]
          '[org.martinklepsch.boot-gzip :refer [gzip]])
 
 (task-options!
