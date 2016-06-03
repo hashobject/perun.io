@@ -7,7 +7,7 @@
                    [:li.dib.mr2 [:a.pv2.ph3.fw6.link.near-black.focus-black {:href uri} label]])]
     [:nav {:role "navigation"}
      [:ul.list.pl0.ma0
-      (nav-item "/guides.html" "Guides")
+      (nav-item "/guides/" "Guides")
       (nav-item "https://github.com/hashobject/perun/wiki" "Community")
       (nav-item "https://github.com/hashobject/perun" "GitHub")]]))
 
@@ -121,18 +121,20 @@
                        [:p "As things are, at some point you'll get stuck. In this case you can reach out to fellow users on the Clojurians Slack or just open an issue. We're happy to help."]]})]]
 
 
-    #_[:section.max-width-4.mx-auto.py4
-       [:h2#plugins "Plugins"]
-       [:p "Perun comes with a set of bundled plugins but what important is that you can also
-             use Boot plugins and easily create your own."]
-       [:p "Here is the list of the current plugins:"]
-       [:ul.list-reset.flex.flex-wrap
-        (->> (:plugins global-meta)
-             (map (fn [plugin]
-                    [:li.col.col-4.p2.border--silver.border
-                     [:span (:name plugin)]
-                     [:p (:description plugin)]])))]
-       #_[:div.py4.border--silver.border-top (:content (first posts))]]]))
+    ;; [:section.max-width-4.mx-auto.py4
+    ;;  [:h2#plugins "Plugins"]
+    ;;  [:p "Perun comes with a set of bundled plugins but what important is that you can also
+    ;;          use Boot plugins and easily create your own."]
+    ;;  [:p "Here is the list of the current plugins:"]
+    ;;  [:ul.list-reset.flex.flex-wrap
+    ;;   (->> (:plugins global-meta)
+    ;;        (map (fn [plugin]
+    ;;               [:li.col.col-4.p2.border--silver.border
+    ;;                [:span (:name plugin)]
+    ;;                [:p (:description plugin)]])))]
+    ;;  [:div.py4.border--silver.border-top (:content (first posts))]]
+
+    ]))
 
 (defn with-top-nav [& contents]
   (base
@@ -147,7 +149,8 @@
     [:div.ph3.mt5 contents]]))
 
 (defn edit-link [post]
-  (str "https://github.com/hashobject/perun.io/edit/new/guides/" (:path post)))
+  (let [branch "new"]
+    (str "https://github.com/hashobject/perun.io/edit/" branch "/guides/" (:path post))))
 
 (defn guide-page [{global-meta :meta post :entry}]
   (with-top-nav
