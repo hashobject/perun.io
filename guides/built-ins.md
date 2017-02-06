@@ -101,7 +101,7 @@ You can customize `markdown` using these options:
                                 `:tasklistitems`
 
 By default, the `:autolinks`, `:strikethrough`, `:fenced-code-blocks`, and
-`:extanchorlinks` are enabled.
+`:extanchorlinks` extensions are enabled.
 
 -----
 
