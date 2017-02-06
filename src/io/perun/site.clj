@@ -151,8 +151,8 @@
     [:div.ph3.mt5 contents]]))
 
 (defn edit-link [post]
-  (let [branch "new"]
-    (str "https://github.com/hashobject/perun.io/edit/" branch "/guides/" (:path post))))
+  (let [branch "master"]
+    (str "https://github.com/hashobject/perun.io/edit/" branch "/resources/" (:original-path post))))
 
 (defn guide-page [{global-meta :meta post :entry}]
   (with-top-nav

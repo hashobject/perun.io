@@ -42,7 +42,7 @@ and use your favorite text editor to add a file `build.boot` as below:
 ```clojure
 (set-env!
  :source-paths #{"src" "content"}
- :dependencies '[ [perun "0.3.0" :scope "test"] ])
+ :dependencies '[ [perun "0.4.2-SNAPSHOT" :scope "test"] ])
 
 (require '[io.perun :refer :all])
 ```
@@ -53,8 +53,8 @@ also add a file `boot.properties` (dont worry about it for now):
 #http://boot-clj.com
 #Mon Jan 18 23:19:36 CET 2016
 BOOT_CLOJURE_NAME=org.clojure/clojure
-BOOT_CLOJURE_VERSION=1.7.0
-BOOT_VERSION=2.5.5
+BOOT_CLOJURE_VERSION=1.8.0
+BOOT_VERSION=2.6.0
 BOOT_EMIT_TARGET=no
 ```
 
