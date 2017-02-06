@@ -164,7 +164,7 @@
     (for [g (sort-by :index guides)]
       (if (:complete g)
         [:a.dt.pv3.mv3.no-underline
-         {:href (str "/" (:permalink g))}
+         {:href (:permalink g)}
          [:div.dtc.pv1 (icon (:icon g))]
          [:div.dtc.pl4.black.v-top
           [:h2.ma0 (:title g)]

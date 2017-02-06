@@ -1,4 +1,4 @@
-{:base-url "https://perun.io"
+{:base-url "https://perun.io/"
  :plugins [{:name "markdown"
             :description "parse mardown files with YAML metadata"}
            {:name "global-metadata"

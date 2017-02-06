@@ -2,7 +2,7 @@
   :source-paths #{"src"}
   :resource-paths #{"resources" "guides"}
   :dependencies '[[hiccup "1.0.5"]
-                  [perun "0.3.0"]
+                  [perun "0.4.1-SNAPSHOT"]
                   [confetti "0.1.2-SNAPSHOT"]
                   [deraen/boot-sass "0.2.1"]
                   [org.slf4j/slf4j-nop "1.7.13" :scope "test"]
@@ -24,13 +24,10 @@
   (let [guide? (fn [e] (= "guide" (:type e)))]
     (comp (sass)
           (global-metadata)
-          (base)
-          (markdown)
-          (permalink :permalink-fn (fn [e]
-                                     (if (guide? e)
-                                       (str "guides/" (:short-filename e) "/")
-                                       (str (:short-filename e) ".html")))
-                     :filterer :content)
+          (markdown :options {:extensions {:smarts true}})
+          (permalink :permalink-fn (fn [_ meta]
+                                     (str "/guides/" (:slug meta) "/"))
+                     :filterer guide?)
           (render :renderer 'io.perun.site/guide-page :filterer guide?)
           (collection :renderer 'io.perun.site/render :page "index.html")
           (collection :renderer 'io.perun.site/guides :page "guides/index.html" :filterer guide?))))
