@@ -63,8 +63,10 @@
   [:footer.bg-near-white.pv5.ph3.pa6-ns.mt5.dt-l.w-100.lh-copy
    [:div.dtc-l [:b "Perun"] " is a project by "
     [:span.dim "Anton Podviaznikov"] ", "
-    [:span.dim "Juho Teperi"] " & "
-    [:span.dim "Martin Klepsch."]]
+    [:span.dim "Martin Klepsch"] ", "
+    [:span.dim "Juho Teperi"] ", "
+    [:span.dim "Brent Hagany"] " & "
+    [:span.dim "other contributors."]]
    [:div.dtc-l.tr-l.mt2.mt0-l "Built with Perun and Boot, obviously."]])
 
 (defn base [& contents]
@@ -74,7 +76,7 @@
      [:meta {:http-equiv "X-UA-Compatible" :content "IE=edge,chrome=1"}]
      [:title "perun: composable static site generator build with Clojure and Boot"]
      [:meta {:name "viewport" :content "width=device-width, initial-scale=1.0, user-scalable=no"}]
-     [:meta {:itemprop "author" :name "author" :content "hashobject (team@hashobject.com)"}]
+     [:meta {:itemprop "author" :name "author" :content "Anton Podviaznikov, Martin Klepsch, Juho Teperi, Brent Hagany & other contributors"}]
      [:link {:rel "icon" :type "image/png" :href "/images/48.png" :sizes "48x48"}]
      [:link {:rel "icon" :type "image/png" :href "/images/128.png" :sizes "128x128"}]
      [:link {:rel "icon" :type "image/png" :href "/images/256.png" :sizes "256x256"}]
