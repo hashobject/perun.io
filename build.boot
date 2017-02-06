@@ -7,7 +7,7 @@
                   [hashobject/boot-s3 "0.1.2-SNAPSHOT"]
                   [deraen/boot-sass "0.2.1"]
                   [org.slf4j/slf4j-nop "1.7.13" :scope "test"]
-                  [pandeiro/boot-http "0.7.3"]
+                  [pandeiro/boot-http "0.7.6"]
                   [org.martinklepsch/boot-gzip "0.1.1"]])
 
 (require '[io.perun :refer :all]
