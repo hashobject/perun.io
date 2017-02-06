@@ -33,9 +33,6 @@
     (comp (sass)
           (global-metadata)
           (markdown :options {:extensions {:smarts true}})
-          (slug
-            :slug-fn (fn [_ m]
-              (:short-filename m)))
           (permalink)
           (print-meta)
           (render :renderer 'io.perun.site/guide-page :filterer guide?)
