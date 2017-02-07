@@ -86,10 +86,9 @@ Tasks:   add-repo                    Add all files in project git repo to filese
          install                     Install project jar to local Maven repository.
          jar                         Build a jar file for the project.
          [...]
+         assortment                  Render multiple collections
          atom-feed                   Generate Atom feed
-         base                        Adds some basic information to the perun metadata and
          build-date                  Add :date-build attribute to each file metadata and also to the global meta
-         canonical-url               Adds :canonical-url key to files metadata.
          collection                  Render collection files
          draft                       Exclude draft files
          global-metadata             Read global metadata from `perun.base.edn` or configured file.
@@ -98,14 +97,19 @@ Tasks:   add-repo                    Add all files in project git repo to filese
          images-resize               Resize images to the provided resolutions.
          inject-scripts              Inject JavaScript scripts into html files.
          markdown                    Parse markdown files
-         permalink                   Adds :permalink key to files metadata. Value of key will determine target path.
+         mime-type                   Adds `:mime-type` and `:file-type` keys to each file's metadata
+         paginate                    Render multiple collections
+         permalink                   Moves a file so that its location matches the result of `permalink-fn`
          print-meta                  Utility task to print perun metadata
-         render                      Render pages.
+         render                      Render individual pages from input files
          rss                         Generate RSS feed
          sitemap                     Generate sitemap
-         slug                        Adds :slug key to files metadata. Slug is derived from filename.
-         ttr                         Calculate time to read for each file
-         word-count                  Count words in each file
+         slug                        Renames a file so that the part before the extension matches the result of `slug-fn`
+         static                      Render an individual page solely from a render function
+         tags                        Render multiple collections based on the `:tags` metadata key
+         ttr                         Calculate time to read for each file. Add `:ttr` key to the files' meta
+         word-count                  Count words in each file. Add `:word-count` key to the files' meta
+         yaml-metadata               Parse YAML metadata at the beginning of files
 ```
 
 The part below the `[...]` has been added to the set of available
