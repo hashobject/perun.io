@@ -58,7 +58,7 @@ You can customize `markdown` using these options:
 - `:meta` --- key/values set in this map will be set in the metadata of each file
   processed
 - `:options` --- Enable or disable Markdown extensions by passing a map of extensions
-  to true/false, eg. `{:extensions {:smarts true}`. Valid extension key are\*:
+  to true/false, eg. `{:extensions {:smarts true}`. Valid extension keys are\*:
 
     - `:smarts` --- Pretty ellipses, dashes and apostrophes
     - `:quotes` --- Pretty single and double quotes
@@ -117,7 +117,7 @@ Options are:
 
 - `:renderer` --- This is a symbol that resolves to a function you've defined. It will
   be called with a map containing the following keys:
-    - `:meta`, global perun metadata
+    - `:meta`, global Perun metadata
     - `:entries`, all entries that will be rendered by this `render` call
     - `:entry`, the entry to be rendered
 - `:out-dir` --- change the output directory from "public". It should not start with a
@@ -140,7 +140,7 @@ If you want to render a page based solely on Clojure code, this is the task for 
 
 - `:renderer` --- This is a symbol that resolves to a function you've defined. It will
   be called with a map containing the following keys:
-    - `:meta`, global perun metadata
+    - `:meta`, global Perun metadata
     - `:entry`, the entry to be rendered
 - `:out-dir` --- change the output directory from "public". It should not start with a
   slash, and can be nested, e.g. "foo/bar"
@@ -159,7 +159,7 @@ then `collection` should meet your needs. It's also hot-reloadable. Basic usage 
 
 - `:renderer` --- This is a symbol that resolves to a function you've defined. It will
   be called with a map containing the following keys:
-    - `:meta`, global perun metadata
+    - `:meta`, global Perun metadata
     - `:entries`, all entries included in this collection
     - `:entry`, the entry to be rendered
 - `:out-dir` --- change the output directory from "public". It should not start with a
@@ -187,7 +187,7 @@ options are:
 
 - `:renderer` --- This is a symbol that resolves to a function you've defined. It will
   be called with a map containing the following keys:
-    - `:meta`, global perun metadata
+    - `:meta`, global Perun metadata
     - `:entries`, all entries that will be rendered by this `render` call
     - `:entry`, the entry to be rendered
 - `:out-dir` --- change the output directory from "public". It should not start with a
@@ -228,7 +228,7 @@ indicating which tag the `:entries` belong to. Basic usage is `(tags :renderer
 
 - `:renderer` --- This is a symbol that resolves to a function you've defined. It will
   be called with a map containing the following keys:
-    - `:meta`, global perun metadata
+    - `:meta`, global Perun metadata
     - `:entries`, all entries that have this tag
     - `:entry`, the entry to be rendered
 - `:out-dir` --- change the output directory from "public". It should not start with a
@@ -284,7 +284,7 @@ and the following options are accepted:
 ### inject-scripts
 
 `inject-scripts` is useful if you have javascript that should be included on many pages,
-but you don't want to include them in your render functions. For example, analytics
+but you don't want to include it in your render functions. For example, analytics
 javascript probably shouldn't be loaded in development, but should be loaded in
 production. Rather than writing logic to achieve this behavior, `inject-scripts` can
 simply be included in your production pipeline, but absent from development. Usage:
@@ -418,8 +418,8 @@ these options:
 These tasks aren't concerned with your files' content, or their metadata, they just
 want those files to go where they belong. We should mention that you don't _have_
 to use these tasks to move or delete files. If you have a preferred way of doing
-these things with Boot, you are free to do that - they will have exactly the
-same effect as the tasks that Perun provides.
+these things with Boot, you are free to do that --- Perun will adapt to your way of
+doing things.
 
 -----
 
@@ -436,10 +436,10 @@ no options.
 ### slug
 
 Renaming a file is easy with `slug`. Provide a `:slug-fn` that takes global metadata
-and file metadata as arguments, and returns a filename, and the file shall be moved.
-The default `:slug-fn` parses the date out of Jekyll-style filenames (aka,
-`YYYY-MM-DD-slug.ext`). If that's what you want for all your files, `(slug)` will do.
-You can also customize it with these options:
+and file metadata as arguments, and returns a filename minus extension, and the file
+shall be moved. The default `:slug-fn` parses the date out of Jekyll-style filenames (aka,
+`YYYY-MM-DD-slug.ext` -> `slug.ext`). If that's what you want for all your files, then
+`(slug)` will do. You can also customize it with these options:
 
 - `:slug-fn` --- A function of two arguments: global metadata, and one file's metadata.
   Returns a new name for the file.
