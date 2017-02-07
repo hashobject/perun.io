@@ -41,8 +41,8 @@ and use your favorite text editor to add a file `build.boot` as below:
 
 ```clojure
 (set-env!
- :source-paths #{"src" "content"}
- :dependencies '[ [perun "0.4.2-SNAPSHOT" :scope "test"] ])
+ :source-paths #{"content"}
+ :dependencies '[[perun "0.4.2-SNAPSHOT" :scope "test"]])
 
 (require '[io.perun :refer :all])
 ```
@@ -54,7 +54,7 @@ also add a file `boot.properties` (dont worry about it for now):
 #Mon Jan 18 23:19:36 CET 2016
 BOOT_CLOJURE_NAME=org.clojure/clojure
 BOOT_CLOJURE_VERSION=1.8.0
-BOOT_VERSION=2.6.0
+BOOT_VERSION=2.7.1
 BOOT_EMIT_TARGET=no
 ```
 
@@ -62,7 +62,7 @@ BOOT_EMIT_TARGET=no
 
 Now let's create the simplest website possible: a single page with some text on it.
 
-Create the directory `content` and place a file `index.markdown` inside it, containing the following:
+Create the directory `content` and place a file `index.markdown`, inside it, containing the following:
 
 ```markdown
 # Hello World
@@ -121,14 +121,16 @@ Since we've just created a `index.markdown` file, let's try the `markdown` task:
 
 ```sh
 $ boot markdown
+[yaml-metadata] - parsed 1 files
 [markdown] - parsed 1 markdown files
 ```
 
 Great! We parsed a Markdown file. But where did the resulting
-[HTML][html] go?  As mentioned earlier Perun works by passing values
-from task to task. Most of Perun's tasks don't write files directly
-but instead add information to this value so that it can all be
-written to files at a later stage.
+[HTML][html] go?  As mentioned earlier Perun works by passing a value
+from task to task. This value contains references to your files,
+along with metadata about them. Perun's tasks either write files directly
+or add metadata about your them to this value, so that your final site
+can be progressively built up based on the input you provided.
 
 ```
 ┌───────┐            ┌───────┐            ┌───────┐            ┌───────┐
@@ -138,79 +140,134 @@ written to files at a later stage.
 └───────┘            └───────┘            └───────┘            └───────┘
 ```
 
-To inspect the value that is passed from task to task we can use the
-`print-meta` task. Below you can see how `print-meta` first prints an
-empty list `()` and after the markdown task ran prints more information
-including the rendered markdown.
+To inspect the files and metadata that is passed from task to task, there are
+two tasks we can use. The Boot built-in task `show` includes a convenient
+option to display a tree of all files in the fileset. To see how a task changes
+the fileset, you can use it like this:
+
+```sh
+$ boot show -f markdown show -f
+
+└── index.markdown
+[yaml-metadata] - parsed 1 files
+[markdown] - parsed 1 markdown files
+
+├── public
+│   └── index.html
+└── index.markdown
+```
+
+You can see here how the `markdown` task transformed `index.markdown` into
+`public/index.html`. In the same way, you can use Perun's `print-meta` task to
+see how the metadata changes. Below you can see how `print-meta` first prints a
+map of metadata for `index.markdown`, and after the markdown task ran it adds
+information for `index.html`, including the rendered Markdown.
 
 ```sh
 $ boot print-meta markdown print-meta
-()
-[markdown] - parsed 1 markdown files
-({:content "<h1><a href=\"#hello-world\" name=\"hello-world\"></a>hello world</h1>",
-  :extension "md",
-  :filename "index.md",
-  :full-path "/Users/martin/etc/boot/cache/tmp/Users/martin/code/perun-guide/k8y/-grrwi1/index.md",
-  :original true,
+({:extension "markdown",
+  :filename "index.markdown",
+  :full-path "/Users/brent/.boot/cache/tmp/Users/brent/Dropbox/www/my-website/14qc/-grrwi1/index.markdown",
   :parent-path "",
-  :path "index.md",
-  :short-filename "index"})
+  :path "index.markdown",
+  :permalink "/index.markdown",
+  :short-filename "index",
+  :slug "index"})
+[yaml-metadata] - parsed 1 files
+[markdown] - parsed 1 markdown files
+({:extension "html",
+  :filename "index.html",
+  :full-path "/Users/brent/.boot/cache/tmp/Users/brent/Dropbox/www/my-website/14qc/f0sqpx/public/index.html",
+  :include-atom true,
+  :include-rss true,
+  :original-path "index.markdown",
+  :out-dir "public",
+  :parent-path "public/",
+  :path "public/index.html",
+  :permalink "/",
+  :short-filename "index",
+  :slug "index",
+  :io.perun/trace [:io.perun/yaml-metadata :io.perun/markdown]}
+ {:extension "markdown",
+  :filename "index.markdown",
+  :full-path "/Users/brent/.boot/cache/tmp/Users/brent/Dropbox/www/my-website/14qc/f0sqpx/index.markdown",
+  :include-atom true,
+  :include-rss true,
+  :original true,
+  :original-path "index.markdown",
+  :parent-path "",
+  :parsed "<h1><a href=\"#hello-world\" name=\"hello-world\"></a>Hello World</h1>\n<p>We are making a website!</p>",
+  :path "index.markdown",
+  :permalink "/index.markdown",
+  :short-filename "index",
+  :slug "index",
+  :io.perun/trace [:io.perun/yaml-metadata :io.perun/markdown]})
 ```
 
-Let's do something with that information, let's render it to a
-file. Perun provides a `render` task. Let's use `boot` to figure out
-what it does:
+Let's do something with that information, let's turn it into a complete HTML file,
+that includes our rendered Markdown. Perun provides a `render` task. Let's use
+`boot` to figure out what it does:
 
 ```sh
 TODO fix this
 $ boot render --help
-Render individual pages for entries in perun data.
+Render individual pages from input files
 
-The symbol supplied as `renderer` should resolve to a function
-which will be called with a map containing the following keys:
- - `:meta`, global perun metadata
- - `:entries`, all entries
- - `:entry`, the entry to be rendered
+ The symbol supplied as `renderer` should resolve to a function
+ which will be called with a map containing the following keys:
+  - `:meta`, global perun metadata
+  - `:entries`, all entries
+  - `:entry`, the entry to be rendered
 
-Entries can optionally be filtered by supplying a function
-to the `filterer` option.
-
-Filename is determined as follows:
-If permalink is set for the file, it is used as the filepath.
-If permalink ends in slash, index.html is used as filename.
-If permalink is not set, the original filename is used with file extension set to html.
+ Entries can optionally be filtered by supplying a function
+ to the `filterer` option.
 
 Options:
-  -h, --help               Print this help info.
-  -o, --out-dir OUTDIR     Set the output directory to OUTDIR.
-      --filterer FILTER    Set filter function to FILTER.
-  -r, --renderer RENDERER  Set page renderer (fully qualified symbol which resolves to a function) to RENDERER.
+  -h, --help                   Print this help info.
+  -o, --out-dir OUTDIR         OUTDIR sets the output directory (default: "public").
+      --filterer FILTER        FILTER sets predicate to use for selecting entries (default: `identity`).
+  -e, --extensions EXTENSIONS  Conj EXTENSIONS onto extensions of files to include
+  -r, --renderer RENDERER      RENDERER sets page renderer (fully qualified symbol which resolves to a function).
+  -m, --meta META              META sets metadata to set on each entry.
 ```
 
-Ok, so rendering individual pages for entries. Given that we only have
-a single entry right now that sounds like what we want. Let's try just calling
+Ok, so it takes input files and renders individual pages. Given that we only have
+a single HTML file right now that sounds like what we want. Let's try just calling
 the `render` task after the `markdown` task:
 
 ```
 $ boot markdown render
+[yaml-metadata] - parsed 1 files
 [markdown] - parsed 1 markdown files
-             clojure.lang.ExceptionInfo: java.lang.AssertionError: Assert failed: Renderer must be a fully qualified symbol, i.e. 'my.ns/fun
-                                         (and (symbol? sym) (namespace sym))
+clojure.lang.ExceptionInfo: Assert failed: Renderer must be a fully qualified symbol, i.e. 'my.ns/fun
+                            (and (symbol? sym) (namespace sym))
     data: {:file
-           "/var/folders/ss/4qg3hk1d4nv40phg1360ng5w0000gn/T/boot.user1104049499782741856.clj",
-           :line 19}
-java.util.concurrent.ExecutionException: java.lang.AssertionError: Assert failed: Renderer must be a fully qualified symbol, i.e. 'my.ns/fun
-                                         (and (symbol? sym) (namespace sym))
-               java.lang.AssertionError: Assert failed: Renderer must be a fully qualified symbol, i.e. 'my.ns/fun
-                                         (and (symbol? sym) (namespace sym))
-          io.perun/assert-renderer!  perun.clj:  375
-             io.perun/render-in-pod  perun.clj:  379
-         io.perun/eval2098/fn/fn/fn  perun.clj:  417
-         io.perun/eval1600/fn/fn/fn  perun.clj:  116
-                boot.core/run-tasks   core.clj:  794
-                  boot.core/boot/fn   core.clj:  804
-clojure.core/binding-conveyor-fn/fn   core.clj: 1916
-                                ...
+           "/var/folders/n4/vg52wwmn02xbfx_4g2l53z1m0000gn/T/boot.user6227545201614571872.clj",
+           :line 11}
+  java.lang.AssertionError: Assert failed: Renderer must be a fully qualified symbol, i.e. 'my.ns/fun
+                            (and (symbol? sym) (namespace sym))
+io.perun/assert-renderer/invokeStatic  perun.clj:  614
+             io.perun/assert-renderer  perun.clj:  613
+  io.perun/render-in-pod/invokeStatic  perun.clj:  618
+               io.perun/render-in-pod  perun.clj:  617
+     io.perun/render-to-paths/iter/fn  perun.clj:  641
+                                  ...
+        clojure.core/seq/invokeStatic   core.clj:  137
+                  clojure.core/map/fn   core.clj: 2637
+                                  ...
+        clojure.core/seq/invokeStatic   core.clj:  137
+      clojure.core/dorun/invokeStatic   core.clj: 3024
+      clojure.core/doall/invokeStatic   core.clj: 3039
+                   clojure.core/doall   core.clj: 3039
+io.perun/render-to-paths/invokeStatic  perun.clj:  638
+             io.perun/render-to-paths  perun.clj:  623
+       io.perun/render-pre-wrap/fn/fn  perun.clj:  659
+      io.perun/content-pre-wrap/fn/fn  perun.clj:  210
+      io.perun/content-pre-wrap/fn/fn  perun.clj:  210
+                  boot.core/run-tasks   core.clj:  938
+                    boot.core/boot/fn   core.clj:  948
+  clojure.core/binding-conveyor-fn/fn   core.clj: 1938
+                                  ...
 ```
 
 Duh, that didn't work. The error tells us we need to supply a
@@ -250,15 +307,16 @@ Now that we have a function that we can use as `renderer` let's give it a try:
 $ boot markdown render -r site.core/page  # -r is a shorthand for --renderer
 ```
 
-**Error!** Our program can't find the Hiccup code because we haven't
-added it to our list of dependencies. Modify `build.boot` so it looks
-like this:
+**Error!** Our program can't find our function because we didn't tell Boot
+to look in the `src` directory for our code. Also, it wouldn't be able
+to execute the Hiccup code because we haven't added it to our list of
+dependencies. Modify `build.boot` so it looks like this:
 
 ```clojure
 (set-env!
  :source-paths #{"src" "content"}
- :dependencies '[[perun  "0.3.0" :scope "test"]
-                 [hiccup "1.0.5"]])
+ :dependencies '[[perun "0.4.2-SNAPSHOT" :scope "test"]
+                 [hiccup "1.0.5" :exclusions [org.clojure/clojure]]])
 
 (require '[io.perun :refer :all])
 ```
@@ -270,6 +328,7 @@ Now try the command from above again and see that it works:
 
 ```sh
 $ boot markdown render -r site.core/page
+[yaml-metadata] - parsed 1 files
 [markdown] - parsed 1 markdown files
 [render] - rendered 1 pages
 ```
@@ -279,6 +338,7 @@ the `target` task to your command:
 
 ```sh
 $ boot markdown render -r site.core/page target
+[yaml-metadata] - parsed 1 files
 [markdown] - parsed 1 markdown files
 [render] - rendered 1 pages
 Writing target dir(s)...
@@ -330,9 +390,16 @@ with websites. To get closer to the "mode of operation" of an actual
 website and to fix this problem we need to serve our website over
 [HTTP][http].
 
-Add `[pandeiro/boot-http "0.7.0"]` to the list of `:dependencies` in
-your `build.boot`. Also modify the `require` statement in that file to
-look like this:
+<!---
+adding tools.nrepl below is necessary because of this bug:
+https://github.com/pandeiro/boot-http/pull/61. When it is merged, we
+can remove it as a dependency
+-->
+
+Add `[pandeiro/boot-http "0.7.6" :exclusions [org.clojure/clojure]]`
+and `[org.clojure/tools.nrepl "0.2.11" :exclusions [org.clojure/clojure]]`
+to the list of `:dependencies` in your `build.boot`. Also modify the
+`require` statement in that file to look like this:
 
 ```clojure
 (require '[io.perun :refer :all]
