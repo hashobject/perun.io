@@ -158,7 +158,7 @@
 
 (defn guide-page [{global-meta :meta post :entry}]
   (with-top-nav
-    [:div
+    [:div.guide
      [:h1.dib.ma0.pr2 (:title post)]
      [:a.no-underline {:href (edit-link post)} "edit"]]
     [:div.md (:content post)]))
