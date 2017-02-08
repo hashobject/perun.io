@@ -1,21 +1,23 @@
 (set-env!
   :source-paths #{"src"}
   :resource-paths #{"resources"}
-  :dependencies '[[hiccup "1.0.5"]
+  :dependencies '[[hiccup "1.0.5" :exclusions [org.clojure/clojure]]
                   [perun "0.4.2-SNAPSHOT"]
                   [confetti "0.1.2-SNAPSHOT"]
-                  [hashobject/boot-s3 "0.1.2-SNAPSHOT"]
+                  [hashobject/boot-s3 "0.1.2-SNAPSHOT" :exclusions [org.clojure/clojure]]
                   [deraen/boot-sass "0.2.1"]
                   [org.slf4j/slf4j-nop "1.7.13" :scope "test"]
-                  [pandeiro/boot-http "0.7.6"]
+                  [pandeiro/boot-http "0.7.6" :exclusions [org.clojure/clojure]]
+                  ;; tools.nrepl can be removed after https://github.com/pandeiro/boot-http/pull/61
+                  ;; is merged
+                  [org.clojure/tools.nrepl "0.2.11" :exclusions [org.clojure/clojure]]
                   [org.martinklepsch/boot-gzip "0.1.1"]])
 
 (require '[io.perun :refer :all]
          '[deraen.boot-sass :refer [sass]]
          '[pandeiro.boot-http :refer [serve]]
          '[confetti.boot-confetti :refer [create-site sync-bucket]]
-         '[hashobject.boot-s3 :refer :all]
-         '[org.martinklepsch.boot-gzip :refer [gzip]])
+         '[hashobject.boot-s3 :refer :all])
 
 (task-options!
   pom {:project 'perun.io :version "0.2.0"}
