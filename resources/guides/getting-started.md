@@ -81,7 +81,7 @@ The printed output will have a section similar to this:
 ```
 Tasks:   add-repo                    Add all files in project git repo to fileset.
          aot                         Perform AOT compilation of Clojure namespaces.
-         checkout                    Checkout dependencies task.
+         checkout                    Checkout dependencies task. DEPRECATED. (Use -c, --checkouts Boot option.)
          help                        Print usage info and list available tasks.
          install                     Install project jar to local Maven repository.
          jar                         Build a jar file for the project.
@@ -89,14 +89,15 @@ Tasks:   add-repo                    Add all files in project git repo to filese
          assortment                  Render multiple collections
          atom-feed                   Generate Atom feed
          build-date                  Add :date-build attribute to each file metadata and also to the global meta
-         collection                  Render collection files
+         collection                  Render single file for a collection of entries
          draft                       Exclude draft files
          global-metadata             Read global metadata from `perun.base.edn` or configured file.
          gravatar                    Find gravatar urls using emails
-         images-dimensions           Adds images' dimensions to the file metadata:
+         images-dimensions           Add images' dimensions to the file metadata:
          images-resize               Resize images to the provided resolutions.
          inject-scripts              Inject JavaScript scripts into html files.
-         markdown                    Parse markdown files
+         markdown                    Parse markdown files with yaml front matter
+         markdown*                   Parse markdown files
          mime-type                   Adds `:mime-type` and `:file-type` keys to each file's metadata
          paginate                    Render multiple collections
          permalink                   Moves a file so that its location matches the result of `permalink-fn`
@@ -125,8 +126,8 @@ Since we've just created a `index.markdown` file, let's try the `markdown` task:
 
 ```sh
 $ boot markdown
-[yaml-metadata] - parsed 1 files
-[markdown] - parsed 1 markdown files
+[yaml-metadata] - rendered new or changed file index.markdown
+[markdown] - rendered new or changed file public/index.html
 ```
 
 Great! We parsed a Markdown file. But where did the resulting
@@ -153,35 +154,34 @@ the fileset, you can use it like this:
 $ boot show -f markdown show -f
 
 └── index.markdown
-[yaml-metadata] - parsed 1 files
-[markdown] - parsed 1 markdown files
+[yaml-metadata] - rendered new or changed file index.markdown
+[markdown] - rendered new or changed file public/index.html
 
-├── public
-│   └── index.html
-└── index.markdown
+└── public
+    └── index.html
 ```
 
 You can see here how the `markdown` task transformed `index.markdown` into
 `public/index.html`. In the same way, you can use Perun's `print-meta` task to
 see how the metadata changes. Below you can see how `print-meta` first prints a
-map of metadata for `index.markdown`, and after the markdown task ran it adds
-information for `index.html`, including the rendered Markdown.
+map of metadata for `index.markdown`, and after the markdown task ran it prints
+information for `index.html`.
 
 ```sh
 $ boot print-meta markdown print-meta
 ({:extension "markdown",
   :filename "index.markdown",
-  :full-path "/Users/brent/.boot/cache/tmp/Users/brent/Dropbox/www/my-website/14qc/-grrwi1/index.markdown",
+  :full-path "/Users/brent/.boot/cache/tmp/Users/brent/Dropbox/www/my-website/15nl/r3nb31/index.markdown",
   :parent-path "",
   :path "index.markdown",
   :permalink "/index.markdown",
   :short-filename "index",
   :slug "index"})
-[yaml-metadata] - parsed 1 files
-[markdown] - parsed 1 markdown files
+[yaml-metadata] - rendered new or changed file index.markdown
+[markdown] - rendered new or changed file public/index.html
 ({:extension "html",
   :filename "index.html",
-  :full-path "/Users/brent/.boot/cache/tmp/Users/brent/Dropbox/www/my-website/14qc/f0sqpx/public/index.html",
+  :full-path "/Users/brent/.boot/cache/tmp/Users/brent/Dropbox/www/my-website/15nl/u2qisy/public/index.html",
   :include-atom true,
   :include-rss true,
   :original-path "index.markdown",
@@ -189,20 +189,6 @@ $ boot print-meta markdown print-meta
   :parent-path "public/",
   :path "public/index.html",
   :permalink "/",
-  :short-filename "index",
-  :slug "index",
-  :io.perun/trace [:io.perun/yaml-metadata :io.perun/markdown]}
- {:extension "markdown",
-  :filename "index.markdown",
-  :full-path "/Users/brent/.boot/cache/tmp/Users/brent/Dropbox/www/my-website/14qc/f0sqpx/index.markdown",
-  :include-atom true,
-  :include-rss true,
-  :original true,
-  :original-path "index.markdown",
-  :parent-path "",
-  :parsed "<h1><a href=\"#hello-world\" name=\"hello-world\"></a>Hello World</h1>\n<p>We are making a website!</p>",
-  :path "index.markdown",
-  :permalink "/index.markdown",
   :short-filename "index",
   :slug "index",
   :io.perun/trace [:io.perun/yaml-metadata :io.perun/markdown]})
@@ -213,7 +199,6 @@ that includes our rendered Markdown. Perun provides a `render` task. Let's use
 `boot` to figure out what it does:
 
 ```sh
-TODO fix this
 $ boot render --help
 Render individual pages from input files
 
@@ -241,37 +226,26 @@ the `render` task after the `markdown` task:
 
 ```
 $ boot markdown render
-[yaml-metadata] - parsed 1 files
-[markdown] - parsed 1 markdown files
-clojure.lang.ExceptionInfo: Assert failed: Renderer must be a fully qualified symbol, i.e. 'my.ns/fun
-                            (and (symbol? sym) (namespace sym))
-    data: {:file
-           "/var/folders/n4/vg52wwmn02xbfx_4g2l53z1m0000gn/T/boot.user6227545201614571872.clj",
-           :line 11}
+                              java.lang.Thread.run              Thread.java:  745
+java.util.concurrent.ThreadPoolExecutor$Worker.run  ThreadPoolExecutor.java:  617
+ java.util.concurrent.ThreadPoolExecutor.runWorker  ThreadPoolExecutor.java: 1142
+               java.util.concurrent.FutureTask.run          FutureTask.java:  266
+                                               ...
+               clojure.core/binding-conveyor-fn/fn                 core.clj: 1938
+                                 boot.core/boot/fn                 core.clj: 1030
+                                               ...
+                         boot.core/construct-tasks                 core.clj:  992
+                                clojure.core/apply                 core.clj:  646
+                                               ...
+                              io.perun/eval1031/fn                perun.clj:  749
+                          io.perun/render-pre-wrap                perun.clj:  699
+                          io.perun/assert-renderer                perun.clj:  689
   java.lang.AssertionError: Assert failed: Renderer must be a fully qualified symbol, i.e. 'my.ns/fun
                             (and (symbol? sym) (namespace sym))
-io.perun/assert-renderer/invokeStatic  perun.clj:  614
-             io.perun/assert-renderer  perun.clj:  613
-  io.perun/render-in-pod/invokeStatic  perun.clj:  618
-               io.perun/render-in-pod  perun.clj:  617
-     io.perun/render-to-paths/iter/fn  perun.clj:  641
-                                  ...
-        clojure.core/seq/invokeStatic   core.clj:  137
-                  clojure.core/map/fn   core.clj: 2637
-                                  ...
-        clojure.core/seq/invokeStatic   core.clj:  137
-      clojure.core/dorun/invokeStatic   core.clj: 3024
-      clojure.core/doall/invokeStatic   core.clj: 3039
-                   clojure.core/doall   core.clj: 3039
-io.perun/render-to-paths/invokeStatic  perun.clj:  638
-             io.perun/render-to-paths  perun.clj:  623
-       io.perun/render-pre-wrap/fn/fn  perun.clj:  659
-      io.perun/content-pre-wrap/fn/fn  perun.clj:  210
-      io.perun/content-pre-wrap/fn/fn  perun.clj:  210
-                  boot.core/run-tasks   core.clj:  938
-                    boot.core/boot/fn   core.clj:  948
-  clojure.core/binding-conveyor-fn/fn   core.clj: 1938
-                                  ...
+clojure.lang.ExceptionInfo: Assert failed: Renderer must be a fully qualified symbol, i.e. 'my.ns/fun
+                            (and (symbol? sym) (namespace sym))
+    file: "/var/folders/n4/vg52wwmn02xbfx_4g2l53z1m0000gn/T/boot.user8340544814703936458.clj"
+    line: 11
 ```
 
 Duh, that didn't work. The error tells us we need to supply a
@@ -332,9 +306,9 @@ Now try the command from above again and see that it works:
 
 ```sh
 $ boot markdown render -r site.core/page
-[yaml-metadata] - parsed 1 files
-[markdown] - parsed 1 markdown files
-[render] - rendered 1 pages
+[yaml-metadata] - rendered new or changed file index.markdown
+[markdown] - rendered new or changed file public/index.html
+[render] - rendered new or changed file public/index.html
 ```
 
 Still we don't see any files being generated, to fix that just append
@@ -342,9 +316,9 @@ the `target` task to your command:
 
 ```sh
 $ boot markdown render -r site.core/page target
-[yaml-metadata] - parsed 1 files
-[markdown] - parsed 1 markdown files
-[render] - rendered 1 pages
+[yaml-metadata] - rendered new or changed file index.markdown
+[markdown] - rendered new or changed file public/index.html
+[render] - rendered new or changed file public/index.html
 Writing target dir(s)...
 ```
 
