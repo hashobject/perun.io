@@ -581,6 +581,8 @@ restrict the amount of information printed, use these options:
   will be passed to `clojure.core/filter`
 - `:extensions` --- restrict the files that will be processed by passing a vector of file
   extensions, eg. `[".html" ".htm"]`
+- `:content-exts` --- files with extensions in this set will have their contents printed
+  along with their metadata
 
 -----
 
