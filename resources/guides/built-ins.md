@@ -68,8 +68,8 @@ You can customize `markdown` using these options:
   will be passed to `clojure.core/filter`
 - `:meta` --- key/values set in this map will be set in the metadata of each file
   processed
-- `:options` --- Enable or disable Markdown extensions by passing a map of extensions
-  to true/false, eg. `{:extensions {:smarts true}}`. Valid extension keys are\*:
+- `:md-exts` --- Enable or disable Markdown extensions by passing a map of extensions
+  to true/false, eg. `{:smarts true}`. Valid extension keys are\*:
 
     - `:smarts` --- Pretty ellipses, dashes and apostrophes
     - `:quotes` --- Pretty single and double quotes
