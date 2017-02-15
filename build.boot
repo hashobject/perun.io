@@ -29,12 +29,14 @@
     :source "public"
     :options {"Cache-Control" "max-age=315360000, no-transform, public"}})
 
+(defn guide? [e] (= "guide" (:type e)))
+
 (deftask header-links
   []
   (content-pre-wrap
    {:task-name "header-links"
     :render-form-fn (fn [data] `(io.perun.site/add-header-link-content ~data))
-    :paths-fn #(content-paths % {:filterer identity :extensions [".html"]})
+    :paths-fn #(content-paths % {:filterer guide? :extensions [".html"]})
     :passthru-fn content-passthru
     :tracer :io.perun/header-links
     :rm-originals true}))
@@ -42,16 +44,15 @@
 (deftask build
   "Build dev version"
   []
-  (let [guide? (fn [e] (= "guide" (:type e)))]
-    (comp (sass)
-          (global-metadata)
-          (markdown :options {:extensions {:smarts true :extanchorlinks true}})
-          (header-links)
-          (permalink)
-          (print-meta)
-          (render :renderer 'io.perun.site/guide-page :filterer guide?)
-          (collection :renderer 'io.perun.site/render :page "index.html")
-          (collection :renderer 'io.perun.site/guides :page "guides/index.html" :filterer guide?))))
+  (comp (sass)
+        (global-metadata)
+        (markdown :options {:extensions {:smarts true :extanchorlinks true}})
+        (header-links)
+        (permalink)
+        (print-meta)
+        (render :renderer 'io.perun.site/guide-page :filterer guide?)
+        (collection :renderer 'io.perun.site/render :page "index.html")
+        (collection :renderer 'io.perun.site/guides :page "guides/index.html" :filterer guide?)))
 
 (deftask dev
   []
