@@ -15,14 +15,25 @@ customized in many different ways. Let's take an in-depth look at them.
 Content tasks create new files, or modify existing ones, and they form the backbone
 of any Perun-based static site.
 
+Conveniently, Perun's content tasks are reload-enabled, so if you set up your `boot`
+pipeline with the `watch` task, changes to your render functions or input files will
+cause the pipeline to re-run with your new changes in effect. When used in
+conjunction with a frontend reloader, like `boot-reload` or `boot-livereload`, you
+get automatic hot reloading in your browser just by saving a file.
+
+In addition to responding to changes, Perun also knows what stays the same from one
+`watch` loop to the next. If the inputs for an output file haven't changed, Perun
+will reuse the results from the last loop, which minimizes work and makes your
+feedback loop as fast as possible.
+
 -----
 
 ### markdown
 
 If you plan to write text content and haven't already chosen a format, Perun
-recommends Markdown. It's a flexible format that can be transformed into many
-different output formats, depending on your needs. Perun currently only supports
-HTML output, but expanding this is planned for the future.
+recommends [Markdown][markdown]. It's a flexible format that can be transformed
+into many different output formats, depending on your needs. Perun currently only
+supports HTML output, but expanding this is planned for the future.
 
 Basic usage is simply `(markdown)`. This invocation will look for files that end
 with ".md" or ".markdown", parse their contents into HTML, and write new files to
@@ -107,12 +118,8 @@ By default, the `:autolinks`, `:strikethrough`, `:fenced-code-blocks`, and
 
 ### render
 
-The `render` task allows you to customize HTML output using a function that you define.
-Conveniently, `render` is reload-enabled, so if you set up your `boot` pipeline with
-the `watch` task, changes to your render functions will cause the pipeline to re-run
-with your new changes in effect. When used in conjunction with a frontend reloader, like
-`boot-reload` or `boot-livereload`, you get automatic hot reloading in your browser
-just by saving a file. Basic usage is, `(render :renderer 'your.ns/a-render-fn)`.
+The `render` task allows you to customize HTML output using a function that you define,
+using an existing file as input. Basic usage is `(render :renderer 'your.ns/a-render-fn)`.
 Options are:
 
 - `:renderer` --- This is a symbol that resolves to a function you've defined. It will
@@ -134,9 +141,8 @@ will be passed to `clojure.core/filter`
 ### static
 
 If you want to render a page based solely on Clojure code, this is the task for you.
-`static` is just like `render`, except that it does not require an input file. Like
-`render`, `static` is hot-reloadable. Basic usage is `(static :renderer
-'your.ns/a-render-fn)`. All options are:
+`static` is just like `render`, except that it does not require an input file. Basic
+usage is `(static :renderer 'your.ns/a-render-fn)`. All options are:
 
 - `:renderer` --- This is a symbol that resolves to a function you've defined. It will
   be called with a map containing the following keys:
@@ -154,8 +160,8 @@ If you want to render a page based solely on Clojure code, this is the task for 
 Whereas `render` and `static` are for producing pages that stand on their own, so to
 speak, `collection` is for producing output that aggregates a number of pages. For
 instance, if you want to list your recent blog posts, or provide a table of contents,
-then `collection` should meet your needs. It's also hot-reloadable. Basic usage is
-`(collection :renderer 'your.ns/a-render-fn)`, and all options are as follows:
+then `collection` should meet your needs. Basic usage is `(collection :renderer
+'your.ns/a-render-fn)`, and all options are as follows:
 
 - `:renderer` --- This is a symbol that resolves to a function you've defined. It will
   be called with a map containing the following keys:
@@ -224,7 +230,7 @@ the YAML header of your content files, like so:
 `tags` will read this metadata, group all input by each tag, and create a collection for
 each tag. When your render function is called, the `:entry` will have the `:tag` key set,
 indicating which tag the `:entries` belong to. Basic usage is `(tags :renderer
-'your.ns/a-render-fn)`, it hot-reloads, and the options are:
+'your.ns/a-render-fn)`, and the options are:
 
 - `:renderer` --- This is a symbol that resolves to a function you've defined. It will
   be called with a map containing the following keys:
@@ -257,8 +263,6 @@ to be written, and the values are inputs to your `:renderer`. By convention, Per
 render functions with a map containing `:entry`, `:entries`, or `:meta` keys, but you
 are under no obligation to follow suit. As long as `:renderer` knows what to do with the
 values of `:grouper`'s return, everything should work out fine.
-
-Did we mention it hot-reloads your render function?
 
 Basic usage will be `(assortment :grouper a-grouping-fn :renderer 'your.ns/a-render-fn)`,
 and the following options are accepted:
@@ -577,7 +581,11 @@ restrict the amount of information printed, use these options:
   will be passed to `clojure.core/filter`
 - `:extensions` --- restrict the files that will be processed by passing a vector of file
   extensions, eg. `[".html" ".htm"]`
+- `:content-exts` --- files with extensions in this set will have their contents printed
+  along with their metadata
 
 -----
 
 \* Markdown extension descriptions are from https://github.com/sirthias/pegdown/blob/master/src/main/java/org/pegdown/Extensions.java
+
+[markdown]: https://en.wikipedia.org/wiki/Markdown
