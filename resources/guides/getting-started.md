@@ -113,9 +113,6 @@ Tasks:   add-repo                    Add all files in project git repo to filese
          yaml-metadata               Parse YAML metadata at the beginning of files
 ```
 
-In case Boot complains about a missing `src` directory, you can create
-one by running `mkdir src` and then re-run `boot --help`.
-
 The part below the `[...]` has been added to the set of available
 tasks by the code we put into our `build.boot` file and are part of
 [Perun][perun], the static site generator we will use in this guide.
