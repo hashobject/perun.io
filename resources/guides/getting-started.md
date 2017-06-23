@@ -368,13 +368,7 @@ with websites. To get closer to the "mode of operation" of an actual
 website and to fix this problem we need to serve our website over
 [HTTP][http].
 
-<!---
-adding tools.nrepl below is necessary because of this bug:
-https://github.com/pandeiro/boot-http/pull/61. When it is merged, we
-can remove it as a dependency
--->
-
-Add `[pandeiro/boot-http "0.7.6" :exclusions [org.clojure/clojure]]`
+Add `[pandeiro/boot-http "0.8.3" :exclusions [org.clojure/clojure]]`
 and `[org.clojure/tools.nrepl "0.2.11" :exclusions [org.clojure/clojure]]`
 to the list of `:dependencies` in your `build.boot`. Also modify the
 `require` statement in that file to look like this:
