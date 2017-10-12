@@ -119,16 +119,16 @@ By default, the `:autolinks`, `:strikethrough`, `:fenced-code-blocks`, and
 ### pandoc
 
 To keep things simple and avoid any external dependencies, Markdown was
-recommended above. Perun uses the Java implementation of Markdown,
-[Pegdown](https://github.com/sirthias/pegdown). However, if you are willing to
-endure one more install step,
+recommended above. Perun uses a Java Markdown parser by default
+[Flexmark](https://github.com/vsch/flexmark-java). However, if you are willing
+to endure one more install step,
 [Pandoc](http://pandoc.org/MANUAL.html#pandocs-markdown) is the functional,
 Haskell-y mother of all markup format converters, which supports a very useful
 superset of Markdown. Most notably,
 [tables](http://pandoc.org/MANUAL.html#tables),
 [footnotes](http://pandoc.org/MANUAL.html#footnotes), and [math
-notation](http://pandoc.org/MANUAL.html#footnotes) support is quite seamless
-and out of the box.
+notation](http://pandoc.org/MANUAL.html#footnotes) support is quite seamless and
+out of the box.
 
 The `pandoc` task options are:
 
