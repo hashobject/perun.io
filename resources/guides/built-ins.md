@@ -116,6 +116,33 @@ By default, the `:autolinks`, `:strikethrough`, `:fenced-code-blocks`, and
 
 -----
 
+### pandoc
+
+To keep things simple and avoid any external dependencies, Markdown was
+recommended above. Perun uses a Java Markdown parser by default
+[Flexmark](https://github.com/vsch/flexmark-java). However, if you are willing
+to endure one more install step,
+[Pandoc](http://pandoc.org/MANUAL.html#pandocs-markdown) is the functional,
+Haskell-y mother of all markup format converters, which supports a very useful
+superset of Markdown. Most notably,
+[tables](http://pandoc.org/MANUAL.html#tables),
+[footnotes](http://pandoc.org/MANUAL.html#footnotes), and [math
+notation](http://pandoc.org/MANUAL.html#footnotes) support is quite seamless and
+out of the box.
+
+The `pandoc` task options are:
+
+- `:out-dir` --- Set the output directory
+- `:out-ext` --- Set the output extension
+- `:filterer` --- Predicate to use for selecting entries (default: `identity`)
+- `:extensions` --- Input extensions to process (default `.md, .markdown`)
+- `:meta` --- Metadata to set on each entry
+- `:cmd-opts` --- CMD line options to pass to `pandoc`, (default `["-f"
+"markdown" "-t" "html5"]`, which converts markdown files to html5). For more
+information on CMD opts, check the pandoc [user guide](http://pandoc.org/MANUAL.html).
+
+-----
+
 ### render
 
 The `render` task allows you to customize HTML output using a function that you define,
