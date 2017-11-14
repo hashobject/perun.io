@@ -369,7 +369,6 @@ website and to fix this problem we need to serve our website over
 [HTTP][http].
 
 Add `[pandeiro/boot-http "0.8.3" :exclusions [org.clojure/clojure]]`
-and `[org.clojure/tools.nrepl "0.2.11" :exclusions [org.clojure/clojure]]`
 to the list of `:dependencies` in your `build.boot`. Also modify the
 `require` statement in that file to look like this:
 
