@@ -100,7 +100,7 @@ Tasks:   add-repo                    Add all files in project git repo to filese
          markdown*                   Parse markdown files
          mime-type                   Adds `:mime-type` and `:file-type` keys to each file's metadata
          paginate                    Render multiple collections
-         permalink                   Moves a file so that its location matches the result of `permalink-fn`
+         permalink                   Move a file so that its location matches the result of `permalink-fn`
          print-meta                  Utility task to print perun metadata
          render                      Render individual pages from input files
          rss                         Generate RSS feed
