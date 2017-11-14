@@ -46,7 +46,7 @@
   []
   (comp (sass)
         (global-metadata)
-        (markdown :options {:extensions {:smarts true :extanchorlinks true}})
+        (markdown :md-exts {:smarts true :extanchorlinks true})
         (header-links)
         (permalink)
         (print-meta)
