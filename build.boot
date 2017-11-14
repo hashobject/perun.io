@@ -33,7 +33,7 @@
 
 (deftask header-links
   []
-  (content-task
+  (content-pre-wrap
    {:task-name "header-links"
     :render-form-fn (fn [data] `(io.perun.site/add-header-link-content ~data))
     :paths-fn #(content-paths % {:filterer guide? :extensions [".html"]})
