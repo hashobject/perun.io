@@ -14,7 +14,7 @@
                   [org.clojure/tools.nrepl "0.2.11" :exclusions [org.clojure/clojure]]
                   [org.martinklepsch/boot-gzip "0.1.1"]])
 
-(require '[io.perun :refer :all]
+(require '[io.perun :as perun]
          '[deraen.boot-sass :refer [sass]]
          '[pandeiro.boot-http :refer [serve]]
          '[confetti.boot-confetti :refer [create-site sync-bucket]]
@@ -33,11 +33,11 @@
 
 (deftask header-links
   []
-  (content-task
+  (perun/content-task
    {:task-name "header-links"
     :render-form-fn (fn [data] `(io.perun.site/add-header-link-content ~data))
-    :paths-fn #(content-paths % {:filterer guide? :extensions [".html"]})
-    :passthru-fn content-passthru
+    :paths-fn #(perun/content-paths % {:filterer guide? :extensions [".html"]})
+    :passthru-fn perun/content-passthru
     :tracer :io.perun/header-links
     :rm-originals true}))
 
@@ -45,14 +45,14 @@
   "Build dev version"
   []
   (comp (sass)
-        (global-metadata)
-        (markdown :md-exts {:smarts true :extanchorlinks true})
+        (perun/global-metadata)
+        (perun/markdown :md-exts {:smarts true :extanchorlinks true})
         (header-links)
-        (permalink)
-        (print-meta)
-        (render :renderer 'io.perun.site/guide-page :filterer guide?)
-        (collection :renderer 'io.perun.site/render :page "index.html")
-        (collection :renderer 'io.perun.site/guides :page "guides/index.html" :filterer guide?)))
+        (perun/permalink)
+        (perun/print-meta)
+        (perun/render :renderer 'io.perun.site/guide-page :filterer guide?)
+        (perun/collection :renderer 'io.perun.site/render :page "index.html")
+        (perun/collection :renderer 'io.perun.site/guides :page "guides/index.html" :filterer guide?)))
 
 (deftask dev
   []

@@ -54,7 +54,7 @@ also add a file `boot.properties` (dont worry about it for now):
 #Mon Jan 18 23:19:36 CET 2016
 BOOT_CLOJURE_NAME=org.clojure/clojure
 BOOT_CLOJURE_VERSION=1.8.0
-BOOT_VERSION=2.7.1
+BOOT_VERSION=2.7.2
 BOOT_EMIT_TARGET=no
 ```
 
@@ -100,7 +100,7 @@ Tasks:   add-repo                    Add all files in project git repo to filese
          markdown*                   Parse markdown files
          mime-type                   Adds `:mime-type` and `:file-type` keys to each file's metadata
          paginate                    Render multiple collections
-         permalink                   Moves a file so that its location matches the result of `permalink-fn`
+         permalink                   Move a file so that its location matches the result of `permalink-fn`
          print-meta                  Utility task to print perun metadata
          render                      Render individual pages from input files
          rss                         Generate RSS feed
@@ -369,7 +369,6 @@ website and to fix this problem we need to serve our website over
 [HTTP][http].
 
 Add `[pandeiro/boot-http "0.8.3" :exclusions [org.clojure/clojure]]`
-and `[org.clojure/tools.nrepl "0.2.11" :exclusions [org.clojure/clojure]]`
 to the list of `:dependencies` in your `build.boot`. Also modify the
 `require` statement in that file to look like this:
 
