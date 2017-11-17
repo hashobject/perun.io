@@ -143,6 +143,47 @@ information on CMD opts, check the pandoc [user guide](http://pandoc.org/MANUAL.
 
 -----
 
+### asciidoctor
+
+For more features and flexibility than what Markdown brings, you might 
+consider [AsciiDoc](https://en.wikipedia.org/wiki/AsciiDoc) instead. 
+See a [comparison to Markdown](https://github.com/asciidoctor/asciidoctor.org/blob/master/docs/_includes/asciidoc-vs-markdown.adoc).
+
+The `asciidoctor` task uses the [AsciiDoctor](http://asciidoctor.org/) text
+processor to transform files ending with ".ad", ".asc", ".adoc" and ".asciidoc" to HTML. 
+
+The `asciidoctor` task options are:
+
+- `:out-dir` --- Set the output directory
+- `:filterer` --- Predicate to use for selecting entries (default: `identity`)
+- `:extensions` --- Input extensions to process (default `.ad, .asc, .adoc, .asciidoc`)
+- `:meta` --- Metadata to set on each entry
+
+-----
+
+### highlight
+
+The `highlight` task can be used to provide syntax highlighting for code blocks
+using [Pygments](http://pygments.org/). Pygments supports syntax highlighting for
+a wide variety of programming languages. 
+
+Syntax highlighting is performed on HTML files, so the `highlight` task must come
+after a HTML-producing task in your build pipeline. 
+
+CSS styles for Pygments must be made available. You may use one of the 
+[ready-made, unlicensed themes](https://github.com/richleland/pygments-css), or make your own.
+
+For highlighting to work with Markdown sources, code blocks must be fenced with backticks and
+a language must be defined (e.g. ` ```javascript `).
+
+
+The `highlight` task options are:
+
+- `:filterer` --- Predicate to use for selecting entries (default: `identity`)
+- `:extensions` --- Input extensions to process (default: `.html`)
+- `:class` --- CSS class to wrap code blocks with (default: `highlight`)
+-----
+
 ### render
 
 The `render` task allows you to customize HTML output using a function that you define,
