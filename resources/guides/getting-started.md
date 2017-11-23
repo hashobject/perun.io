@@ -41,10 +41,10 @@ and use your favorite text editor to add a file `build.boot` as below:
 
 ```clojure
 (set-env!
- :source-paths #{"content"}
+ :resource-paths #{"content"}
  :dependencies '[[perun "0.4.2-SNAPSHOT" :scope "test"]])
 
-(require '[io.perun :refer :all])
+(require '[io.perun :as perun])
 ```
 
 also add a file `boot.properties` (dont worry about it for now):
@@ -79,38 +79,38 @@ session.
 
 The printed output will have a section similar to this:
 ```
-Tasks:   add-repo                    Add all files in project git repo to fileset.
-         aot                         Perform AOT compilation of Clojure namespaces.
-         checkout                    Checkout dependencies task. DEPRECATED. (Use -c, --checkouts Boot option.)
-         help                        Print usage info and list available tasks.
-         install                     Install project jar to local Maven repository.
-         jar                         Build a jar file for the project.
-         [...]
-         assortment                  Render multiple collections
-         atom-feed                   Generate Atom feed
-         build-date                  Add :date-build attribute to each file metadata and also to the global meta
-         collection                  Render single file for a collection of entries
-         draft                       Exclude draft files
-         global-metadata             Read global metadata from `perun.base.edn` or configured file.
-         gravatar                    Find gravatar urls using emails
-         images-dimensions           Add images' dimensions to the file metadata:
-         images-resize               Resize images to the provided resolutions.
-         inject-scripts              Inject JavaScript scripts into html files.
-         markdown                    Parse markdown files with yaml front matter
-         markdown*                   Parse markdown files
-         mime-type                   Adds `:mime-type` and `:file-type` keys to each file's metadata
-         paginate                    Render multiple collections
-         permalink                   Move a file so that its location matches the result of `permalink-fn`
-         print-meta                  Utility task to print perun metadata
-         render                      Render individual pages from input files
-         rss                         Generate RSS feed
-         sitemap                     Generate sitemap
-         slug                        Renames a file so that the part before the extension matches the result of `slug-fn`
-         static                      Render an individual page solely from a render function
-         tags                        Render multiple collections based on the `:tags` metadata key
-         ttr                         Calculate time to read for each file. Add `:ttr` key to the files' meta
-         word-count                  Count words in each file. Add `:word-count` key to the files' meta
-         yaml-metadata               Parse YAML metadata at the beginning of files
+Tasks:   perun/asciidoctor           Parse asciidoc files with yaml front matter using Asciidoctor
+         perun/asciidoctor*          Parse asciidoc files using Asciidoctor
+         perun/assortment            Render multiple collections
+         perun/atom-feed             Generate Atom feed
+         perun/base                  Deprecated - metadata based on a files' path is now automatically set when other tasks
+         perun/build-date            Add :date-build attribute to each file metadata and also to the global meta
+         perun/canonical-url         Deprecated - The `:canonical-url` key will now automatically be set in the `entry` map passed
+         perun/collection            Render single file for a collection of entries
+         perun/draft                 Exclude draft files
+         perun/global-metadata       Read global metadata from `perun.base.edn` or configured file.
+         perun/gravatar              Find gravatar urls using emails
+         perun/highlight             Syntax highlighting for code blocks using Pygments.
+         perun/images-dimensions     Add images' dimensions to the file metadata:
+         perun/images-resize         Resize images to the provided resolutions.
+         perun/inject-scripts        Inject JavaScript scripts into html files.
+         perun/markdown              Parse markdown files with yaml front matter
+         perun/markdown*             Parse markdown files
+         perun/mime-type             Adds `:mime-type` and `:file-type` keys to each file's metadata
+         perun/paginate              Render multiple collections
+         perun/pandoc                Parse files with pandoc
+         perun/pandoc*               Parse files with pandoc
+         perun/permalink             Moves a file so that its location matches the result of `permalink-fn`
+         perun/print-meta            Utility task to print perun metadata
+         perun/render                Render individual pages from input files
+         perun/rss                   Generate RSS feed
+         perun/sitemap               Generate sitemap
+         perun/slug                  Renames a file so that the part before the extension matches the result of `slug-fn`
+         perun/static                Render an individual page solely from a render function
+         perun/tags                  Render multiple collections based on the `:tags` metadata key
+         perun/ttr                   Calculate time to read for each file. Add `:ttr` key to the files' meta
+         perun/word-count            Count words in each file. Add `:word-count` key to the files' meta
+         perun/yaml-metadata         Parse YAML metadata at the beginning of files
 ```
 
 The part below the `[...]` has been added to the set of available
@@ -125,7 +125,7 @@ tasks by the code we put into our `build.boot` file and are part of
 Since we've just created a `index.markdown` file, let's try the `markdown` task:
 
 ```sh
-$ boot markdown
+$ boot perun/markdown
 [yaml-metadata] - rendered new or changed file index.markdown
 [markdown] - rendered new or changed file public/index.html
 ```
@@ -168,7 +168,7 @@ map of metadata for `index.markdown`, and after the markdown task ran it prints
 information for `index.html`.
 
 ```sh
-$ boot print-meta markdown print-meta
+$ boot perun/print-meta perun/markdown perun/print-meta
 ({:extension "markdown",
   :filename "index.markdown",
   :full-path "/Users/brent/.boot/cache/tmp/Users/brent/Dropbox/www/my-website/15nl/r3nb31/index.markdown",
@@ -199,7 +199,7 @@ that includes our rendered Markdown. Perun provides a `render` task. Let's use
 `boot` to figure out what it does:
 
 ```sh
-$ boot render --help
+$ boot perun/render --help
 Render individual pages from input files
 
  The symbol supplied as `renderer` should resolve to a function
@@ -282,7 +282,7 @@ data structures to HTML. A simplistic example would be:
 Now that we have a function that we can use as `renderer` let's give it a try:
 
 ```sh
-$ boot markdown render -r site.core/page  # -r is a shorthand for --renderer
+$ boot perun/markdown perun/render -r site.core/page  # -r is a shorthand for --renderer
 ```
 
 **Error!** Our program can't find our function because we didn't tell Boot
@@ -296,7 +296,7 @@ dependencies. Modify `build.boot` so it looks like this:
  :dependencies '[[perun "0.4.2-SNAPSHOT" :scope "test"]
                  [hiccup "1.0.5" :exclusions [org.clojure/clojure]]])
 
-(require '[io.perun :refer :all])
+(require '[io.perun :as perun])
 ```
 
 > Note: By adding a dependency to the list of `:dependencies` in `build.boot`
@@ -305,7 +305,7 @@ dependencies. Modify `build.boot` so it looks like this:
 Now try the command from above again and see that it works:
 
 ```sh
-$ boot markdown render -r site.core/page
+$ boot perun/markdown perun/render -r site.core/page
 [yaml-metadata] - rendered new or changed file index.markdown
 [markdown] - rendered new or changed file public/index.html
 [render] - rendered new or changed file public/index.html
@@ -315,7 +315,7 @@ Still we don't see any files being generated, to fix that just append
 the `target` task to your command:
 
 ```sh
-$ boot markdown render -r site.core/page target
+$ boot perun/markdown perun/render -r site.core/page target
 [yaml-metadata] - rendered new or changed file index.markdown
 [markdown] - rendered new or changed file public/index.html
 [render] - rendered new or changed file public/index.html
@@ -380,7 +380,7 @@ to the list of `:dependencies` in your `build.boot`. Also modify the
 Now use the newly available `serve` task like this:
 
 ```
-boot serve --resource-root public markdown render -r site.core/page wait
+boot serve --resource-root public perun/markdown perun/render -r site.core/page wait
 ```
 
 There are two new things here:
@@ -430,7 +430,7 @@ change we have to restart our command. To avoid this you can adapt the
 command like this:
 
 ```sh
-boot serve -r public watch markdown render -r site.core/page
+boot serve -r public watch perun/markdown perun/render -r site.core/page
 ```
 The `watch` task will rebuild your page whenever an important file
 changes. (Because the watch tasks keeps the pipeline running we don't
