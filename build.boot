@@ -46,7 +46,7 @@
   []
   (comp (sass)
         (perun/global-metadata)
-        (perun/markdown :options {:extensions {:smarts true :extanchorlinks true}})
+        (perun/markdown :md-exts {:smarts true :extanchorlinks true})
         (header-links)
         (perun/permalink)
         (perun/print-meta)
