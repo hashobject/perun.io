@@ -41,7 +41,7 @@ and use your favorite text editor to add a file `build.boot` as below:
 
 ```clojure
 (set-env!
- :resource-paths #{"content"}
+ :source-paths #{"content"}
  :dependencies '[[perun "0.4.2-SNAPSHOT" :scope "test"]])
 
 (require '[io.perun :as perun])
