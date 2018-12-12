@@ -528,11 +528,11 @@ shall be moved. The default `:slug-fn` parses the date out of Jekyll-style filen
 
 ### permalink
 
-If you'd like to think about URL's instead of filenames, then use `permalink`. It will
-intelligently handle URL's for files as well as folders (aka, links that end with a
+If you'd like to think about URL's instead of filenames, 
+then use `permalink`. It will intelligently handle URL's for files as well as folders (aka, links that end with a
 slash). The default `:permalink-fn` strips the `:doc-root` out of the file's `:path`
-and uses what remains as the permalink. If that meets your needs, the invocation will
-be `(permalink)`. Customization is achieved by way of these options:
+and uses what remains as the permalink. 
+If that meets your needs, the invocation will be `(permalink)`. Customization is achieved by way of these options:
 
 - `:permalink-fn` --- A function of two arguments: global metadata, and one file's metadata.
   Returns a new permalink for the file; may end in a slash.
@@ -619,8 +619,9 @@ tasks for retrieving and manipulating their characteristics.
 ### images-resize
 
 If you'd like to ensure your images have a standard size, or wish to have several sizes available so that you can send an appropriate size to a client,
-`images-resize` is available to make this easier. `(images-resize)` is sufficient
-for default behavior, and you can also set these options:
+`images-resize` is available to make this easier. 
+`(images-resize)` is sufficient for default behavior, 
+and you can also set these options:
 
 - `:out-dir` --- change the output directory from "public". It should not start with a
   slash, and can be nested, e.g. "foo/bar"
