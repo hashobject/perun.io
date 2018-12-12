@@ -17,7 +17,7 @@ knowledge except for the very basics of programming with Clojure.
 ## Step 1: Install Boot
 
 [Boot][boot] is a tool to help authoring Clojure projects.  It
-downloads dependencies and can build your project. Also [Perun][perun]
+downloads dependencies and can build your project. [Perun][perun]
 is built on top of Boot.
 
 Installation instructions can be found in Boot's
@@ -47,7 +47,7 @@ and use your favorite text editor to add a file `build.boot` as below:
 (require '[io.perun :as perun])
 ```
 
-also add a file `boot.properties` (dont worry about it for now):
+also add a file `boot.properties` (don't worry about it for now):
 
 ```sh
 #http://boot-clj.com
@@ -117,9 +117,9 @@ The part below the `[...]` has been added to the set of available
 tasks by the code we put into our `build.boot` file and are part of
 [Perun][perun], the static site generator we will use in this guide.
 
-> Perun works, similarily to — and on top of — Boot. Both provide tasks
+> Perun works, similarly to — and on top of — Boot. Both provide tasks
 > operating on a value and producing a new value. By ensuring that the
-> newly produced value looks similarily to the received value you can
+> newly produced value looks similarly to the received value you can
 > mix and match tasks as you wish (this is often called composition).
 
 Since we've just created a `index.markdown` file, let's try the `markdown` task:
@@ -131,7 +131,7 @@ $ boot perun/markdown
 ```
 
 Great! We parsed a Markdown file. But where did the resulting
-[HTML][html] go?  As mentioned earlier Perun works by passing a value
+[HTML][html] go?  As mentioned earlier, Perun works by passing a value
 from task to task. This value contains references to your files,
 along with metadata about them. Perun's tasks either write files directly
 or add metadata about your them to this value, so that your final site
@@ -324,7 +324,7 @@ Writing target dir(s)...
 
 > Note: Remember the value we spoke about earlier that is passed from
 > task to task? In Boot this value describes a directory structure and
-> files inside it. Whenever the `target` task is used Boot will sync
+> files inside it. Whenever the `target` task is used, Boot will sync
 > relevant files from this description to an actual target directory.
 
 Now there should be a directory called `target` containing another
@@ -342,7 +342,7 @@ Admittedly it is a very basic website but let's recap what we've done:
 
 ## Step 4: Adding more pages and a real server
 
-Let's add an about page by adding the file `content/about.markdown`:
+Let's add an `about` page by adding the file `content/about.markdown`:
 
 ```markdown
 # About this site
@@ -462,7 +462,7 @@ things still to be explored, proceed with whatever interests you most:
   [[check out the Blog Guide|Make a Blog]].
 - **Add custom content beyond Markdown.** Sometimes instead of texts
   you want to have a page rendering other kinds of data. A list of
-  colleagues and and pictures of their faces for instance. Markdown is
+  colleagues and pictures of their faces for instance. Markdown is
   not ideal for these use cases. To learn what you can do in these
   case [[check out the Beyond-Markdown Guide|Beyond Markdown]].
 - **Deploy your site.** You now have a website, great! But it's not on
