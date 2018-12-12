@@ -8,7 +8,7 @@ complete: true
 ---
 Perun's built-in tasks are designed to provide the most commonly-needed functionality
 for building static sites. They were written with flexibility in mind, and can be
-customized in many different ways. Let's take an in-depth look at them.
+customized in many ways. Let's take an in-depth look at them.
 
 ## Content Tasks
 
@@ -32,11 +32,11 @@ feedback loop as fast as possible.
 
 If you plan to write text content and haven't already chosen a format, Perun
 recommends [Markdown][markdown]. It's a flexible format that can be transformed
-into many different output formats, depending on your needs. Perun currently only
+into many output formats, depending on your needs. Perun currently only
 supports HTML output, but expanding this is planned for the future.
 
 Basic usage is simply `(markdown)`. This invocation will look for files that end
-with ".md" or ".markdown", parse their contents into HTML, and write new files to
+with `.md` or `.markdown`, parse their contents into HTML, and write new files to
 the "public" directory that have the same name as the originals, but with the
 extension changed to ".html".
 
@@ -77,8 +77,8 @@ You can customize `markdown` using these options:
                          `:quotes`
     - `:abbreviations` --- PHP Markdown Extra style abbreviations
     - `:hardwraps` --- Enables the parsing of hard wraps as HTML linebreaks. Similar to
-                       what github does
-    - `:autolinks` --- Enables plain autolinks the way github flavoured markdown implements
+what GitHub does
+    - `:autolinks` --- Enables plain autolinks the way GitHub flavoured markdown implements
                        them. With this extension enabled pegdown will intelligently
                        recognize URLs and email addresses without any further delimiters
                        and mark them as the respective link type.
@@ -150,7 +150,7 @@ consider [AsciiDoc](https://en.wikipedia.org/wiki/AsciiDoc) instead.
 See a [comparison to Markdown](https://github.com/asciidoctor/asciidoctor.org/blob/master/docs/_includes/asciidoc-vs-markdown.adoc).
 
 The `asciidoctor` task uses the [AsciiDoctor](http://asciidoctor.org/) text
-processor to transform files ending with ".ad", ".asc", ".adoc" and ".asciidoc" to HTML. 
+processor to transform files ending with `.ad`, `.asc`, `.adoc` and `.asciidoc` to HTML. 
 
 The `asciidoctor` task options are:
 
@@ -187,7 +187,8 @@ The `highlight` task options are:
 ### render
 
 The `render` task allows you to customize HTML output using a function that you define,
-using an existing file as input. Basic usage is `(render :renderer 'your.ns/a-render-fn)`.
+using an existing file as input. 
+Basic usage is `(render :renderer 'your.ns/a-render-fn)`.
 Options are:
 
 - `:renderer` --- This is a symbol that resolves to a function you've defined. It will
@@ -253,10 +254,11 @@ then `collection` should meet your needs. Basic usage is `(collection :renderer
 ### paginate
 
 You'll reach for `paginate` if you don't want to squeeze all of your content into a
-single collection, but instead would like to have your entries divided up into several
-pages. Your render function will be called for each of the resulting pages, and the
-`:entry` will contain a `:page` key, so your render function will be able to tell which
-page it is rendering. `(paginate :renderer 'your.ns/a-render-fn)` is basic usage, and
+single collection, but instead would like to have your entries divided up into several pages. 
+Your render function will be called for each of the resulting pages, 
+and the `:entry` will contain a `:page` key, 
+so your render function will be able to tell which page it is rendering. 
+`(paginate :renderer 'your.ns/a-render-fn)` is basic usage, and
 options are:
 
 - `:renderer` --- This is a symbol that resolves to a function you've defined. It will
@@ -383,11 +385,13 @@ are the same as `markdown`'s.
 
 ### yaml-metadata
 
-The other task that comprises `markdown` is `yaml-metadata`. It only parses the YAML
-frontmatter at the head of files. and overwrites the file without the YAML header, for
-further processing. Again, this is of limited usefulness for most use-cases, but in
-the future, content tasks for formats besides Markdown will be able to use `yaml-metadata`
-in the same way. It has no required arguments and takes two of Perun's more common options:
+The other task that comprises `markdown` is `yaml-metadata`. 
+It only parses the YAML frontmatter at the head of files 
+and overwrites the file without the YAML header, 
+for further processing. 
+Again, this is of limited usefulness for most use-cases, but in
+the future, content tasks for formats besides Markdown will be able to use `yaml-metadata` in the same way. 
+It has no required arguments and takes two of Perun's more common options:
 
 - `:filterer` --- restrict the files that will be processed using this function, which
   will be passed to `clojure.core/filter`
@@ -407,11 +411,11 @@ are.
 ### global-metadata
 
 Global metadata is data that applies to your whole site, like its `:base-url`, or the
-`:doc-root` for your files, or the site's `:site-title`. This task reads an edn file
+`:doc-root` for your files, or the site's `:site-title`. This task reads an EDN file
 containing values like this, and makes those values accessible to later tasks. Basic usage
 is `(global-metadata)`, and its only option is:
 
-- `:filename` --- The name of the edn file to read, `"perun.base.edn"` by default
+- `:filename` --- The name of the EDN file to read, `"perun.base.edn"` by default
 
 -----
 
@@ -614,8 +618,7 @@ tasks for retrieving and manipulating their characteristics.
 
 ### images-resize
 
-If you'd like to ensure your images have a standard size, or wish to have several
-different sizes available so that you can send an appropriate size to a client,
+If you'd like to ensure your images have a standard size, or wish to have several sizes available so that you can send an appropriate size to a client,
 `images-resize` is available to make this easier. `(images-resize)` is sufficient
 for default behavior, and you can also set these options:
 
@@ -640,9 +643,7 @@ retrieve them later. Usage is simply `(images-dimensions)`, and there are no opt
 
 ### print-meta
 
-Useful for debugging, `print-meta` will show all of the metadata that Perun knows for
-the files in your fileset. For all metadata on all files, use `(print-meta)`. To
-restrict the amount of information printed, use these options:
+Useful for debugging, `print-meta` will show all the metadata that Perun knows for the files in your fileset. For all metadata on all files, use `(print-meta)`. To restrict the amount of information printed, use these options:
 
 - `:map-fn` --- this function is applied to each metadata map before it is printed
 - `:filterer` --- restrict the files that will be processed using this function, which
