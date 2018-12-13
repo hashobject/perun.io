@@ -20,9 +20,8 @@ knowledge except for the very basics of programming with Clojure.
 downloads dependencies and can build your project. [Perun][perun]
 is built on top of Boot.
 
-Installation instructions can be found in Boot's
-[Readme][boot-install]. If you already have Boot installed make sure
-you're using the latest version (`boot -u`).
+Installation instructions can be found in Boot's [Readme][boot-install]. 
+Please make sure you're using the latest version of Boot (`boot -u`).
 
 ## Step 2: Create a new directory & add a `build.boot` file
 
@@ -333,12 +332,11 @@ If you open that file you should see your new website! :tada:
 
 Admittedly it is a very basic website but let's recap what we've done:
 
-1. Instead of writing our complete website in HTML we only define it's
+1. Instead of writing our complete website in HTML we only define its
    "frame" or layout in Hiccup/HTML. For the actual content of our
    website we use a specific language (Markdown) making it much easier
    to write and edit content.
-1. Because an HTML file is generated for each Markdown file it's
-   trivial to add new pages.
+1. Because an HTML file is generated for each Markdown file it's trivial to add new pages.
 
 ## Step 4: Adding more pages and a real server
 
@@ -444,7 +442,7 @@ things still to be explored, proceed with whatever interests you most:
 
 - **Make things pretty.** Admittedly our site isn't very pretty right
   now. [CSS][css] can be used to influence the appearance of HTML. It
-  can color texts and backgrounds and do a large number of other
+  can color texts and backgrounds and do a numerous other
   things. If you're familiar with CSS you might already know how to
   add more CSS to the page, if not you can learn all about CSS in the
   [excellent material created by CSSClasses][cssclasses-guide].

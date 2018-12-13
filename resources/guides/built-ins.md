@@ -7,24 +7,26 @@ index: 1
 complete: true
 ---
 Perun's built-in tasks are designed to provide the most commonly-needed functionality
-for building static sites. They were written with flexibility in mind, and can be
-customized in many ways. Let's take an in-depth look at them.
+for building static sites. 
+They were written with flexibility in mind, and can be customized in many ways. 
+Let's take an in-depth look at them.
 
 ## Content Tasks
 
 Content tasks create new files, or modify existing ones, and they form the backbone
-of any Perun-based static site.
+of any Perun static site.
 
-Conveniently, Perun's content tasks are reload-enabled, so if you set up your `boot`
-pipeline with the `watch` task, changes to your render functions or input files will
-cause the pipeline to re-run with your new changes in effect. When used in
-conjunction with a frontend reloader, like `boot-reload` or `boot-livereload`, you
-get automatic hot reloading in your browser just by saving a file.
+Conveniently, Perun's content tasks are reload-enabled, 
+so if you set up your `boot` pipeline with the `watch` task, 
+changes to your render functions or input files will
+cause the pipeline to re-run with your new changes in effect. 
+When used in conjunction with a frontend reloader, like `boot-reload` or `boot-livereload`, 
+you get automatic hot reloading in your browser just by saving a file.
 
 In addition to responding to changes, Perun also knows what stays the same from one
-`watch` loop to the next. If the inputs for an output file haven't changed, Perun
-will reuse the results from the last loop, which minimizes work and makes your
-feedback loop as fast as possible.
+`watch` loop to the next. If the inputs for an output file haven't changed, 
+Perun will reuse the results from the last loop, 
+which minimizes work and makes your feedback loop as fast as possible.
 
 -----
 
@@ -69,16 +71,16 @@ You can customize `markdown` using these options:
 - `:meta` --- key/values set in this map will be set in the metadata of each file
   processed
 - `:md-exts` --- Enable or disable Markdown extensions by passing a map of extensions
-  to true/false, eg. `{:smarts true}`. Valid extension keys are\*:
+  to true/false, e.g. `{:smarts true}`. Valid extension keys are\*:
 
     - `:smarts` --- Pretty ellipses, dashes and apostrophes
     - `:quotes` --- Pretty single and double quotes
-    - `:smartypants` --- All of the smartypants prettyfications. Equivalent to `:smarts` +
+    - `:smartypants` --- All the smartypants prettyfications. Equivalent to `:smarts` +
                          `:quotes`
     - `:abbreviations` --- PHP Markdown Extra style abbreviations
     - `:hardwraps` --- Enables the parsing of hard wraps as HTML linebreaks. Similar to
 what GitHub does
-    - `:autolinks` --- Enables plain autolinks the way GitHub flavoured markdown implements
+    - `:autolinks` --- Enables plain autolinks the way GitHub flavored markdown implements
                        them. With this extension enabled pegdown will intelligently
                        recognize URLs and email addresses without any further delimiters
                        and mark them as the respective link type.
@@ -201,7 +203,7 @@ Options are:
 - `:filterer` --- restrict the files that will be processed using this function, which
 will be passed to `clojure.core/filter`
 - `:extensions` --- restrict the files that will be processed by passing a vector of file
-  extensions, eg. `[".html" ".htm"]`
+  extensions, e.g. `[".html" ".htm"]`
 - `:meta` --- key/values set in this map will be set in the metadata of each file
   processed
 
@@ -242,7 +244,7 @@ then `collection` should meet your needs. Basic usage is `(collection :renderer
 - `:filterer` --- restrict the files that will be processed using this function, which
   will be passed to `clojure.core/filter`
 - `:extensions` --- restrict the files that will be processed by passing a vector of file
-  extensions, eg. `[".html" ".htm"]`
+  extensions, e.g. `[".html" ".htm"]`
 - `:sortby` --- `entries` will be sorted by the values returned from this function
 - `:comparator` --- values returned from `:sortby` will be compared using this function
   during sorting.
@@ -275,7 +277,7 @@ options are:
 - `:filterer` --- restrict the files that will be processed using this function, which
   will be passed to `clojure.core/filter`
 - `:extensions` --- restrict the files that will be processed by passing a vector of file
-  extensions, eg. `[".html" ".htm"]`
+  extensions, e.g. `[".html" ".htm"]`
 - `:sortby` --- `entries` will be sorted by the values returned from this function
 - `:comparator` --- values returned from `:sortby` will be compared using this function
   during sorting.
@@ -312,7 +314,7 @@ indicating which tag the `:entries` belong to. Basic usage is `(tags :renderer
 - `:filterer` --- restrict the files that will be processed using this function, which
   will be passed to `clojure.core/filter`
 - `:extensions` --- restrict the files that will be processed by passing a vector of file
-  extensions, eg. `[".html" ".htm"]`
+  extensions, e.g. `[".html" ".htm"]`
 - `:sortby` --- `entries` will be sorted by the values returned from this function
 - `:comparator` --- values returned from `:sortby` will be compared using this function
   during sorting.
@@ -347,7 +349,7 @@ and the following options are accepted:
 - `:filterer` --- restrict the files that will be processed using this function, which
   will be passed to `clojure.core/filter`
 - `:extensions` --- restrict the files that will be processed by passing a vector of file
-  extensions, eg. `[".html" ".htm"]`
+  extensions, e.g. `[".html" ".htm"]`
 - `:sortby` --- `entries` will be sorted by the values returned from this function
 - `:comparator` --- values returned from `:sortby` will be compared using this function
   during sorting.
@@ -369,7 +371,7 @@ simply be included in your production pipeline, but absent from development. Usa
 - `:filter` --- regexes in this set will be used to select file paths to process
 - `:remove` --- regexes in this set will be used to remove file paths to process
 - `:extensions` --- restrict the files that will be processed by passing a vector of file
-  extensions, eg. `[".html" ".htm"]`
+  extensions, e.g. `[".html" ".htm"]`
 
 -----
 
@@ -396,7 +398,7 @@ It has no required arguments and takes two of Perun's more common options:
 - `:filterer` --- restrict the files that will be processed using this function, which
   will be passed to `clojure.core/filter`
 - `:extensions` --- restrict the files that will be processed by passing a vector of file
-  extensions, eg. `[".html" ".htm"]`
+  extensions, e.g. `[".html" ".htm"]`
 
 -----
 
@@ -428,7 +430,7 @@ Default behavior is achieved with `(build-date)`, and you can pass these options
 - `:filterer` --- restrict the files that will be processed using this function, which
   will be passed to `clojure.core/filter`
 - `:extensions` --- restrict the files that will be processed by passing a vector of file
-  extensions, eg. `[".html" ".htm"]`
+  extensions, e.g. `[".html" ".htm"]`
 
 -----
 
@@ -445,7 +447,7 @@ can customize the task with these options:
 - `:filterer` --- restrict the files that will be processed using this function, which
   will be passed to `clojure.core/filter`
 - `:extensions` --- restrict the files that will be processed by passing a vector of file
-  extensions, eg. `[".html" ".htm"]`
+  extensions, e.g. `[".html" ".htm"]`
 
 -----
 
@@ -459,7 +461,7 @@ Basic usage is `(ttr)`, and you can control which files to consider using these 
 - `:filterer` --- restrict the files that will be processed using this function, which
   will be passed to `clojure.core/filter`
 - `:extensions` --- restrict the files that will be processed by passing a vector of file
-  extensions, eg. `[".html" ".htm"]`
+  extensions, e.g. `[".html" ".htm"]`
 
 -----
 
@@ -471,7 +473,7 @@ Basic usage is `(word-count)`, and you can control which files get counted using
 - `:filterer` --- restrict the files that will be processed using this function, which
   will be passed to `clojure.core/filter`
 - `:extensions` --- restrict the files that will be processed by passing a vector of file
-  extensions, eg. `[".html" ".htm"]`
+  extensions, e.g. `[".html" ".htm"]`
 
 -----
 
@@ -485,7 +487,7 @@ these options:
 - `:filterer` --- restrict the files that will be processed using this function, which
   will be passed to `clojure.core/filter`
 - `:extensions` --- restrict the files that will be processed by passing a vector of file
-  extensions, eg. `[".html" ".htm"]`
+  extensions, e.g. `[".html" ".htm"]`
 
 -----
 
@@ -522,7 +524,7 @@ shall be moved. The default `:slug-fn` parses the date out of Jekyll-style filen
 - `:filterer` --- restrict the files that will be processed using this function, which
   will be passed to `clojure.core/filter`
 - `:extensions` --- restrict the files that will be processed by passing a vector of file
-  extensions, eg. `[".html" ".htm"]`
+  extensions, e.g. `[".html" ".htm"]`
 
 -----
 
@@ -539,7 +541,7 @@ If that meets your needs, the invocation will be `(permalink)`. Customization is
 - `:filterer` --- restrict the files that will be processed using this function, which
   will be passed to `clojure.core/filter`
 - `:extensions` --- restrict the files that will be processed by passing a vector of file
-  extensions, eg. `[".html" ".htm"]`
+  extensions, e.g. `[".html" ".htm"]`
 
 -----
 
@@ -561,7 +563,7 @@ information must be passed to the task. Options are as follows:
 - `:filterer` --- restrict the files that will be processed using this function, which
   will be passed to `clojure.core/filter`
 - `:extensions` --- restrict the files that will be processed by passing a vector of file
-  extensions, eg. `[".html" ".htm"]`
+  extensions, e.g. `[".html" ".htm"]`
 - `:out-dir` --- change the output directory from "public". It should not start with a
   slash, and can be nested, e.g. "foo/bar"
 - `:site-title` --- overrides global metadata of the same name; at least one is required
@@ -582,7 +584,7 @@ it must be set by the task. Options are:
 - `:filterer` --- restrict the files that will be processed using this function, which
   will be passed to `clojure.core/filter`
 - `:extensions` --- restrict the files that will be processed by passing a vector of file
-  extensions, eg. `[".html" ".htm"]`
+  extensions, e.g. `[".html" ".htm"]`
 - `:out-dir` --- change the output directory from "public". It should not start with a
   slash, and can be nested, e.g. "foo/bar"
 - `:site-title` --- overrides global metadata of the same name; at least one is required
@@ -603,7 +605,7 @@ knows about every page in your site, it can generate one for you automatically, 
 - `:filterer` --- restrict the files that will be processed using this function, which
   will be passed to `clojure.core/filter`
 - `:extensions` --- restrict the files that will be processed by passing a vector of file
-  extensions, eg. `[".html" ".htm"]`
+  extensions, e.g. `[".html" ".htm"]`
 - `:out-dir` --- change the output directory from "public". It should not start with a
   slash, and can be nested, e.g. "foo/bar"
 
@@ -626,15 +628,16 @@ and you can also set these options:
 - `:out-dir` --- change the output directory from "public". It should not start with a
   slash, and can be nested, e.g. "foo/bar"
 - `:resolutions` --- The numbers in this set define the width of the output file(s).
-  default: `#{3840 2560 1920 1280 1024 640}`
+  Default: `#{3840 2560 1920 1280 1024 640}`
 
 -----
 
 ### images-dimensions
 
 Sometimes, just knowing the size of your images is enough. `images-dimensions` sets
-`:width` and `:height` keys in the metadata for your images, so that you can easily
-retrieve them later. Usage is simply `(images-dimensions)`, and there are no options.
+`:width` and `:height` keys in the metadata for your images, 
+so that you can easily retrieve them later. 
+Usage is simply `(images-dimensions)`, and there are no options.
 
 -----
 
@@ -650,7 +653,7 @@ Useful for debugging, `print-meta` will show all the metadata that Perun knows f
 - `:filterer` --- restrict the files that will be processed using this function, which
   will be passed to `clojure.core/filter`
 - `:extensions` --- restrict the files that will be processed by passing a vector of file
-  extensions, eg. `[".html" ".htm"]`
+  extensions, e.g. `[".html" ".htm"]`
 - `:content-exts` --- files with extensions in this set will have their contents printed
   along with their metadata
 
