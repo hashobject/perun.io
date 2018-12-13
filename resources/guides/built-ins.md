@@ -134,13 +134,13 @@ out of the box.
 
 The `pandoc` task options are:
 
-- `:out-dir` --- Set the output directory
-- `:out-ext` --- Set the output extension
-- `:filterer` --- Predicate to use for selecting entries (default: `identity`)
-- `:extensions` --- Input extensions to process (default `.md, .markdown`)
-- `:meta` --- Metadata to set on each entry
-- `:cmd-opts` --- CMD line options to pass to `pandoc`, (default `["-f"
-"markdown" "-t" "html5"]`, which converts markdown files to html5). For more
+- `:out-dir` --- set the output directory
+- `:out-ext` --- set the output extension
+- `:filterer` --- predicate to use for selecting entries (default: `identity`)
+- `:extensions` --- input extensions to process (default `.md, .markdown`)
+- `:meta` --- metadata to set on each entry
+- `:cmd-opts` --- CMD line options to pass to `pandoc`, 
+(default `["-f" "markdown" "-t" "html5"]`, which converts markdown files to html5). For more
 information on CMD opts, check the pandoc [user guide](http://pandoc.org/MANUAL.html).
 
 -----
@@ -156,10 +156,10 @@ processor to transform files ending with `.ad`, `.asc`, `.adoc` and `.asciidoc` 
 
 The `asciidoctor` task options are:
 
-- `:out-dir` --- Set the output directory
-- `:filterer` --- Predicate to use for selecting entries (default: `identity`)
-- `:extensions` --- Input extensions to process (default `.ad, .asc, .adoc, .asciidoc`)
-- `:meta` --- Metadata to set on each entry
+- `:out-dir` --- set the output directory
+- `:filterer` --- predicate to use for selecting entries (default: `identity`)
+- `:extensions` --- input extensions to process (default `.ad, .asc, .adoc, .asciidoc`)
+- `:meta` --- metadata to set on each entry
 
 -----
 
@@ -231,8 +231,9 @@ usage is `(static :renderer 'your.ns/a-render-fn)`. All options are:
 Whereas `render` and `static` are for producing pages that stand on their own, so to
 speak, `collection` is for producing output that aggregates a number of pages. For
 instance, if you want to list your recent blog posts, or provide a table of contents,
-then `collection` should meet your needs. Basic usage is `(collection :renderer
-'your.ns/a-render-fn)`, and all options are as follows:
+then `collection` should meet your needs. 
+Basic usage is `(collection :renderer 'your.ns/a-render-fn)`, 
+and all options are as follows:
 
 - `:renderer` --- This is a symbol that resolves to a function you've defined. It will
   be called with a map containing the following keys:
@@ -367,9 +368,9 @@ simply be included in your production pipeline, but absent from development. Usa
 `(inject-scripts :scripts #{"path/to/script.js"})`, and all options:
 
 - `:scripts` --- files named here will be read and their contents injected before the
-  `<body>` tag of the HTML files that are processed by this task.
-- `:filter` --- regexes in this set will be used to select file paths to process
-- `:remove` --- regexes in this set will be used to remove file paths to process
+  `<body>` tag of the HTML files that are processed by this task
+- `:filter` --- regular expressions in this set will be used to select file paths to process
+- `:remove` --- regular expressions in this set will be used to remove file paths to process
 - `:extensions` --- restrict the files that will be processed by passing a vector of file
   extensions, e.g. `[".html" ".htm"]`
 
@@ -439,8 +440,8 @@ Default behavior is achieved with `(build-date)`, and you can pass these options
 Especially handy if you have multiple authors on your site, `gravatar` performs an API
 request to `gravatar.com` and retrieves a url for the avatar associated with an email
 address. This url is then stored under the key of your choice in each file's metadata.
-Basic usage is `(gravatar :source-key :author-email :target-key :gravatar)`, and you
-can customize the task with these options:
+Basic usage is `(gravatar :source-key :author-email :target-key :gravatar)`, 
+and you can customize the task with these options:
 
 - `:source-key` --- The file metadata key to read the email address from
 - `:target-key` --- The file metadata key to write the gravatar url to
@@ -454,7 +455,8 @@ can customize the task with these options:
 ### ttr
 
 It's polite to tell your readers how much time it will probably take them to read your
-content. `ttr` (for "time to read") estimates the amount of reading time in minutes
+content. 
+`ttr` (for "time to read") estimates the amount of reading time in minutes
 based on the length of your content, and stores the result in the `:ttr` metadata key.
 Basic usage is `(ttr)`, and you can control which files to consider using these options:
 
@@ -479,9 +481,10 @@ Basic usage is `(word-count)`, and you can control which files get counted using
 
 ### mime-type
 
-If you'd like Perun to guess the mime types of your files, use `mime-type`. It's not
-guaranteed to be 100% accurate, but if your files have sensible extensions, it knows
-what to do. `(mime-type)` will guess all of your files, and you can limit this with
+If you'd like Perun to guess the mime types of your files, use `mime-type`. 
+It's not guaranteed to be 100% accurate, but if your files have sensible extensions, 
+it knows what to do. 
+`(mime-type)` will guess all of your files, and you can limit this with
 these options:
 
 - `:filterer` --- restrict the files that will be processed using this function, which
@@ -494,8 +497,10 @@ these options:
 ## Moving and Deleting Tasks
 
 These tasks aren't concerned with your files' content, or their metadata, they just
-want those files to go where they belong. We should mention that you don't _have_
-to use these tasks to move or delete files. If you have a preferred way of doing
+want those files to go where they belong. 
+We should mention that you don't _have_
+to use these tasks to move or delete files. 
+If you have a preferred way of doing
 these things with Boot, you are free to do that --- Perun will adapt to your way of
 doing things.
 
@@ -516,8 +521,9 @@ no options.
 Renaming a file is easy with `slug`. Provide a `:slug-fn` that takes global metadata
 and file metadata as arguments, and returns a filename minus extension, and the file
 shall be moved. The default `:slug-fn` parses the date out of Jekyll-style filenames (aka,
-`YYYY-MM-DD-slug.ext` -> `slug.ext`). If that's what you want for all your files, then
-`(slug)` will do. You can also customize it with these options:
+`YYYY-MM-DD-slug.ext` -> `slug.ext`). 
+If that's what you want for all your files, 
+then `(slug)` will do. You can also customize it with these options:
 
 - `:slug-fn` --- A function of two arguments: global metadata, and one file's metadata.
   Returns a new name for the file.
@@ -530,11 +536,13 @@ shall be moved. The default `:slug-fn` parses the date out of Jekyll-style filen
 
 ### permalink
 
-If you'd like to think about URL's instead of filenames, 
-then use `permalink`. It will intelligently handle URL's for files as well as folders (aka, links that end with a
-slash). The default `:permalink-fn` strips the `:doc-root` out of the file's `:path`
+If you'd like to think about URL's instead of filenames, then use `permalink`. 
+It will intelligently handle URL's for files as well as folders (aka, links that end with a
+slash). 
+The default `:permalink-fn` strips the `:doc-root` out of the file's `:path`
 and uses what remains as the permalink. 
-If that meets your needs, the invocation will be `(permalink)`. Customization is achieved by way of these options:
+If that meets your needs, the invocation will be `(permalink)`. 
+Customization is achieved by way of these options:
 
 - `:permalink-fn` --- A function of two arguments: global metadata, and one file's metadata.
   Returns a new permalink for the file; may end in a slash.
@@ -613,7 +621,7 @@ knows about every page in your site, it can generate one for you automatically, 
 
 ## Image Tasks
 
-Images are an important part of many a static site, so Perun provides a few convenience
+Images are an important part of many static sites, so Perun provides a few convenience
 tasks for retrieving and manipulating their characteristics.
 
 -----
