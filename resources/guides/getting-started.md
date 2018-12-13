@@ -16,13 +16,12 @@ knowledge except for the very basics of programming with Clojure.
 
 ## Step 1: Install Boot
 
-[Boot][boot] is a tool to help authoring Clojure projects.  It
-downloads dependencies and can build your project. [Perun][perun]
-is built on top of Boot.
+[Boot][boot] is a tool to help develop Clojure projects. 
+It downloads dependencies and can build your project. 
+[Perun][perun] is built on top of Boot.
 
-Installation instructions can be found in Boot's
-[Readme][boot-install]. If you already have Boot installed make sure
-you're using the latest version (`boot -u`).
+Installation instructions can be found in Boot's [Readme][boot-install]. 
+Please make sure you're using the latest version of Boot (`boot -u`).
 
 ## Step 2: Create a new directory & add a `build.boot` file
 
@@ -311,7 +310,7 @@ $ boot perun/markdown perun/render -r site.core/page
 [render] - rendered new or changed file public/index.html
 ```
 
-Still we don't see any files being generated, to fix that just append
+Still, we don't see any files being generated, to fix that just append
 the `target` task to your command:
 
 ```sh
@@ -333,12 +332,11 @@ If you open that file you should see your new website! :tada:
 
 Admittedly it is a very basic website but let's recap what we've done:
 
-1. Instead of writing our complete website in HTML we only define it's
+1. Instead of writing our complete website in HTML we only define its
    "frame" or layout in Hiccup/HTML. For the actual content of our
    website we use a specific language (Markdown) making it much easier
    to write and edit content.
-1. Because an HTML file is generated for each Markdown file it's
-   trivial to add new pages.
+1. Because an HTML file is generated for each Markdown file it's trivial to add new pages.
 
 ## Step 4: Adding more pages and a real server
 
@@ -349,7 +347,7 @@ Let's add an `about` page by adding the file `content/about.markdown`:
 This site has been made by following the Perun guides
 ```
 
-Also so that our visitors can find our new about page let's change our
+Now so that our visitors can find our new about page let's change our
 `index.markdown` file to look like this:
 
 ```markdown
@@ -407,10 +405,10 @@ link will bring you to
 [http://localhost:3000/about.html](http://localhost:3000/about.html)
 properly displaying your about page.
 
-**Success!** Every good website should have a way to go back to it's
+**Success!** Every good website should have a way to go back to its
 homepage however so let's modify our renderer function to always show
-a link to the homepage ("root") of the site. In `src/site/core.clj` change
-the `page` function to look like this
+a link to the homepage ("root") of the site. 
+In `src/site/core.clj` change the `page` function to look like this
 
 ```clojure
 (defn page [data]
@@ -443,8 +441,8 @@ You're at the end of the "Getting Started" tutorial. There are many
 things still to be explored, proceed with whatever interests you most:
 
 - **Make things pretty.** Admittedly our site isn't very pretty right
-  now. [CSS][css] can be used to influence the appearance of HTML. It
-  can color texts and backgrounds and do a large number of other
+  now. [CSS][css] can be used to influence the appearance of HTML. 
+  It can color texts and backgrounds and do a numerous other
   things. If you're familiar with CSS you might already know how to
   add more CSS to the page, if not you can learn all about CSS in the
   [excellent material created by CSSClasses][cssclasses-guide].
