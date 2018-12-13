@@ -99,7 +99,7 @@ what GitHub does
                                includes more than just a single paragraph; primarily
                                for backwards-compatibility
     - `:atxheaderspace` --- Requires a space char after Atx # header prefixes, so that
-                            #dasdsdaf is not a header
+                            `#dasdsdaf` is not a header
     - `:relaxedhrules` --- Allow horizontal rules without a blank line following them
     - `:tasklistitems` --- GitHub style task list items: - [ ] and - [x]
     - `:extanchorlinks` --- Generate anchor links for headers using complete contents of
@@ -172,8 +172,9 @@ a wide variety of programming languages.
 Syntax highlighting is performed on HTML files, so the `highlight` task must come
 after a HTML-producing task in your build pipeline. 
 
-CSS styles for Pygments must be made available. You may use one of the 
-[ready-made, unlicensed themes](https://github.com/richleland/pygments-css), or make your own.
+CSS styles for Pygments must be made available. 
+You may use one of the [ready-made, unlicensed themes](https://github.com/richleland/pygments-css), 
+or make your own.
 
 For highlighting to work with Markdown sources, code blocks must be fenced with backticks and
 a language must be defined (e.g. ` ```javascript `).
@@ -302,8 +303,8 @@ the YAML header of your content files, like so:
 
 `tags` will read this metadata, group all input by each tag, and create a collection for
 each tag. When your render function is called, the `:entry` will have the `:tag` key set,
-indicating which tag the `:entries` belong to. Basic usage is `(tags :renderer
-'your.ns/a-render-fn)`, and the options are:
+indicating which tag the `:entries` belong to. 
+Basic usage is `(tags :renderer 'your.ns/a-render-fn)`, and the options are:
 
 - `:renderer` --- This is a symbol that resolves to a function you've defined. It will
   be called with a map containing the following keys:
@@ -438,7 +439,7 @@ Default behavior is achieved with `(build-date)`, and you can pass these options
 ### gravatar
 
 Especially handy if you have multiple authors on your site, `gravatar` performs an API
-request to `gravatar.com` and retrieves a url for the avatar associated with an email
+request to `gravatar.com` and retrieves an url for the avatar associated with an email
 address. This url is then stored under the key of your choice in each file's metadata.
 Basic usage is `(gravatar :source-key :author-email :target-key :gravatar)`, 
 and you can customize the task with these options:
@@ -522,8 +523,8 @@ Renaming a file is easy with `slug`. Provide a `:slug-fn` that takes global meta
 and file metadata as arguments, and returns a filename minus extension, and the file
 shall be moved. The default `:slug-fn` parses the date out of Jekyll-style filenames (aka,
 `YYYY-MM-DD-slug.ext` -> `slug.ext`). 
-If that's what you want for all your files, 
-then `(slug)` will do. You can also customize it with these options:
+If that's what you want for all your files, then `(slug)` will do. 
+You can also customize it with these options:
 
 - `:slug-fn` --- A function of two arguments: global metadata, and one file's metadata.
   Returns a new name for the file.
