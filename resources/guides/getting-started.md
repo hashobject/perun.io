@@ -442,7 +442,7 @@ things still to be explored, proceed with whatever interests you most:
 
 - **Make things pretty.** Admittedly our site isn't very pretty right
   now. [CSS][css] can be used to influence the appearance of HTML. 
-  It can color texts and backgrounds and do a numerous other
+  It can color texts and backgrounds and do lot of other
   things. If you're familiar with CSS you might already know how to
   add more CSS to the page, if not you can learn all about CSS in the
   [excellent material created by CSSClasses][cssclasses-guide].
