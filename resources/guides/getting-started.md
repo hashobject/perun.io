@@ -16,11 +16,11 @@ knowledge except for the very basics of programming with Clojure.
 
 ## Step 1: Install Boot
 
-[Boot][boot] is a tool to help develop Clojure projects. 
-It downloads dependencies and can build your project. 
+[Boot][boot] is a tool to help develop Clojure projects.
+It downloads dependencies and can build your project.
 [Perun][perun] is built on top of Boot.
 
-Installation instructions can be found in Boot's [Readme][boot-install]. 
+Installation instructions can be found in Boot's [Readme][boot-install].
 Please make sure you're using the latest version of Boot (`boot -u`).
 
 ## Step 2: Create a new directory & add a `build.boot` file
@@ -150,7 +150,7 @@ option to display a tree of all files in the fileset. To see how a task changes
 the fileset, you can use it like this:
 
 ```sh
-$ boot show -f markdown show -f
+$ boot show -f perun/markdown show -f
 
 └── index.markdown
 [yaml-metadata] - rendered new or changed file index.markdown
@@ -224,7 +224,7 @@ a single HTML file right now that sounds like what we want. Let's try just calli
 the `render` task after the `markdown` task:
 
 ```
-$ boot markdown render
+$ boot perun/markdown perun/render
                               java.lang.Thread.run              Thread.java:  745
 java.util.concurrent.ThreadPoolExecutor$Worker.run  ThreadPoolExecutor.java:  617
  java.util.concurrent.ThreadPoolExecutor.runWorker  ThreadPoolExecutor.java: 1142
@@ -355,7 +355,7 @@ Now so that our visitors can find our new about page let's change our
 We are making a website! ([about this website](/about.html))
 ```
 
-After rebuilding our site by running `boot markdown render -r
+After rebuilding our site by running `boot perun/markdown render -r
 site.core/page target` we can open `target/public/index.html` again
 and see that there is a link to our new about page. If we click it
 however there will be an error.
@@ -371,7 +371,7 @@ to the list of `:dependencies` in your `build.boot`. Also modify the
 `require` statement in that file to look like this:
 
 ```clojure
-(require '[io.perun :refer :all]
+(require '[io.perun :as perun]
          '[pandeiro.boot-http :refer [serve]])
 ```
 
@@ -407,7 +407,7 @@ properly displaying your about page.
 
 **Success!** Every good website should have a way to go back to its
 homepage however so let's modify our renderer function to always show
-a link to the homepage ("root") of the site. 
+a link to the homepage ("root") of the site.
 In `src/site/core.clj` change the `page` function to look like this
 
 ```clojure
@@ -441,7 +441,7 @@ You're at the end of the "Getting Started" tutorial. There are many
 things still to be explored, proceed with whatever interests you most:
 
 - **Make things pretty.** Admittedly our site isn't very pretty right
-  now. [CSS][css] can be used to influence the appearance of HTML. 
+  now. [CSS][css] can be used to influence the appearance of HTML.
   It can color texts and backgrounds and do lot of other
   things. If you're familiar with CSS you might already know how to
   add more CSS to the page, if not you can learn all about CSS in the
@@ -450,7 +450,7 @@ things still to be explored, proceed with whatever interests you most:
   also be expanded. Adding lists, images and code snippets is trivial
   with Markdown. You can learn more about Markdown in
   [Github's excellent guides][md-guide].
-- Remembering and typing the long `boot serve ...` command can be
+- Remembering and typing the long `boot perun/serve ...` command can be
   annoying, learn how you can define your own tasks consisting of
   several sub-tasks in the [Boot Task Guide][task-guide]
 - **Make a blog.** Everyone can have a [blog][blog], they're a good
