@@ -42,7 +42,7 @@ Use your favorite text editor to add a file `build.boot` as below:
 ```clojure
 (set-env!
  :source-paths #{"content"}
- :dependencies '[[perun "0.4.2-SNAPSHOT" :scope "test"]])
+ :dependencies '[[perun "0.4.3-SNAPSHOT" :scope "test"]])
 
 (require '[io.perun :as perun])
 ```
@@ -351,7 +351,7 @@ Your `build.boot` should now look like this:
 ```clojure
 (set-env!
  :source-paths #{"src" "content"}
- :dependencies '[[perun "0.4.2-SNAPSHOT" :scope "test"]
+ :dependencies '[[perun "0.4.3-SNAPSHOT" :scope "test"]
                  [hiccup "1.0.5" :exclusions [org.clojure/clojure]]])
 
 (require '[io.perun :as perun])
@@ -434,7 +434,7 @@ Your `build.boot` should now look like this:
 ```clojure
 (set-env!
  :source-paths #{"src" "content"}
- :dependencies '[[perun "0.4.2-SNAPSHOT" :scope "test"]
+ :dependencies '[[perun "0.4.3-SNAPSHOT" :scope "test"]
                  [hiccup "1.0.5" :exclusions [org.clojure/clojure]]
                  [pandeiro/boot-http "0.8.3" :exclusions [org.clojure/clojure]]])
 
