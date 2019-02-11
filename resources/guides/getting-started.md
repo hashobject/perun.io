@@ -468,15 +468,17 @@ Now after running this command there will be a line printed like this one:
 ```
 Started Jetty on http://localhost:3000
 ```
-Go to [http://localhost:3000](http://localhost:3000) — you should see
-the index.html file with the link to your about page. Clicking on the
-link will bring you to
-[http://localhost:3000/about.html](http://localhost:3000/about.html)
-properly displaying your about page.
+Go to [http://localhost:3000](http://localhost:3000).
 
-**Success!** Every good website should have a way to go back to its
-homepage however so let's modify our renderer function to always show
-a link to the homepage ("root") of the site.
+In the `index.html` file you should now see the link to your about page.
+Clicking on the link should bring you to
+[http://localhost:3000/about.html](http://localhost:3000/about.html),
+properly displaying your "about" page.
+
+There is still one thing missing: if we follow the link above, we can't go back
+to the homepage. To fix this, let's modify our renderer function to always show
+a link to the site homepage.
+
 In `src/site/core.clj` change the `page` function to look like this
 
 ```clojure
