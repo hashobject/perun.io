@@ -41,8 +41,8 @@ Use your favorite text editor to add a file `build.boot` as below:
 
 ```clojure
 (set-env!
- :source-paths #{"content"}
- :dependencies '[[perun "0.4.3-SNAPSHOT" :scope "test"]])
+  :source-paths #{"content"}
+  :dependencies '[[perun "0.4.3-SNAPSHOT" :scope "test"]])
 
 (require '[io.perun :as perun])
 ```
@@ -263,8 +263,8 @@ Now add a file at `src/site/core.clj` containing the following:
 
 (defn page [data]
   (hp/html5
-   [:div {:style "max-width: 900px; margin: 40px auto;"}
-    (-> data :entry :content)]))
+    [:div {:style "max-width: 900px; margin: 40px auto;"}
+      (-> data :entry :content)]))
 ```
 
 We've added a function that renders a bit of HTML and inserts what has
@@ -350,9 +350,10 @@ Your `build.boot` should now look like this:
 
 ```clojure
 (set-env!
- :source-paths #{"src" "content"}
- :dependencies '[[perun "0.4.3-SNAPSHOT" :scope "test"]
-                 [hiccup "1.0.5" :exclusions [org.clojure/clojure]]])
+  :source-paths #{"src"}
+  :resource-paths #{"content"}
+  :dependencies '[[perun "0.4.3-SNAPSHOT" :scope "test"]
+                  [hiccup "1.0.5" :exclusions [org.clojure/clojure]]])
 
 (require '[io.perun :as perun])
 ```
@@ -433,10 +434,11 @@ Your `build.boot` should now look like this:
 
 ```clojure
 (set-env!
- :source-paths #{"src" "content"}
- :dependencies '[[perun "0.4.3-SNAPSHOT" :scope "test"]
-                 [hiccup "1.0.5" :exclusions [org.clojure/clojure]]
-                 [pandeiro/boot-http "0.8.3" :exclusions [org.clojure/clojure]]])
+  :source-paths #{"src"}
+  :resource-paths #{"content"}
+  :dependencies '[[perun "0.4.3-SNAPSHOT" :scope "test"]
+                  [hiccup "1.0.5" :exclusions [org.clojure/clojure]]
+                  [pandeiro/boot-http "0.8.3" :exclusions [org.clojure/clojure]]])
 
 (require '[io.perun :as perun]
          '[pandeiro.boot-http :refer [serve]])
@@ -480,9 +482,9 @@ In `src/site/core.clj` change the `page` function to look like this
 ```clojure
 (defn page [data]
   (hp/html5
-   [:div {:style "max-width: 900px; margin: 0 auto;"}
-    [:a {:href "/"} "Home"] ; <---- We added this
-    (-> data :entry :content)]))
+    [:div {:style "max-width: 900px; margin: 40px auto;"}
+      [:a {:href "/"} "Home"] ; <---- Line added
+      (-> data :entry :content)]))
 ```
 
 After restarting our site building & serving command go to
