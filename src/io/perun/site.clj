@@ -30,7 +30,6 @@
 (defn perun-logo [size]
   [:svg {:viewBox "0 0 100 100" :version "1.1"
          :width (str size "px") :height (str size "px")
-         ;; :style (str "transform: scale(" size ")")
          :xmlns "http://www.w3.org/2000/svg" :xmlns:xlink "http://www.w3.org/1999/xlink"}
 
    [:polygon#triangle-1
@@ -46,10 +45,8 @@
 (defn triangle [size color]
   #_[:img {:src "/perun-triangles.svg"}]
   [:svg {:viewBox "0 0 100 100" :width (str size "px") :height (str size "px")
-         ;; :style (str "transform: scale(" size ")")
          :stroke-width "40px" :fill color}
    [:use {:xmlns:xlink "http://www.w3.org/1999/xlink"
-          ;; :mask "url(/perun-triangles.svg#mask)"
           :xlink:href  "/perun-triangles.svg#page-1"}]])
 
 
@@ -123,21 +120,6 @@
                 :title "A welcoming community"
                 :body [:div.mw6.lh-copy
                        [:p "As things are, at some point you'll get stuck. In this case you can reach out to fellow users on the Clojurians Slack or just open an issue. We're happy to help."]]})]]]))
-
-
-    ;; [:section.max-width-4.mx-auto.py4
-    ;;  [:h2#plugins "Plugins"]
-    ;;  [:p "Perun comes with a set of bundled plugins but what important is that you can also
-    ;;          use Boot plugins and easily create your own."]
-    ;;  [:p "Here is the list of the current plugins:"]
-    ;;  [:ul.list-reset.flex.flex-wrap
-    ;;   (->> (:plugins global-meta)
-    ;;        (map (fn [plugin]
-    ;;               [:li.col.col-4.p2.border--silver.border
-    ;;                [:span (:name plugin)]
-    ;;                [:p (:description plugin)]])))]
-    ;;  [:div.py4.border--silver.border-top (:content (first posts))]]
-
 
 
 (defn with-top-nav [& contents]
