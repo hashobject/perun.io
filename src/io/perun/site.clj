@@ -30,9 +30,9 @@
 (defn perun-logo [size]
   [:svg {:viewBox "0 0 100 100" :version "1.1"
          :width (str size "px") :height (str size "px")
-         :xmlns "http://www.w3.org/2000/svg" :xmlns:xlink "http://www.w3.org/1999/xlink"
          ;; :style (str "transform: scale(" size ")")
-         }
+         :xmlns "http://www.w3.org/2000/svg" :xmlns:xlink "http://www.w3.org/1999/xlink"}
+
    [:polygon#triangle-1
     {:points "49.4096257 0 98.8192514 98.3899994 0 98.3899994",
      :fill "#DCF9BB",:fill-opacity "0.840000033"}]
@@ -50,8 +50,8 @@
          :stroke-width "40px" :fill color}
    [:use {:xmlns:xlink "http://www.w3.org/1999/xlink"
           ;; :mask "url(/perun-triangles.svg#mask)"
-          :xlink:href  "/perun-triangles.svg#page-1"}]
-     ])
+          :xlink:href  "/perun-triangles.svg#page-1"}]])
+
 
 (defn feature [{:keys [icon-id body title]}]
   [:div.pv5
@@ -122,7 +122,7 @@
       (feature {:icon-id :chat-round-content
                 :title "A welcoming community"
                 :body [:div.mw6.lh-copy
-                       [:p "As things are, at some point you'll get stuck. In this case you can reach out to fellow users on the Clojurians Slack or just open an issue. We're happy to help."]]})]]
+                       [:p "As things are, at some point you'll get stuck. In this case you can reach out to fellow users on the Clojurians Slack or just open an issue. We're happy to help."]]})]]]))
 
 
     ;; [:section.max-width-4.mx-auto.py4
@@ -138,7 +138,7 @@
     ;;                [:p (:description plugin)]])))]
     ;;  [:div.py4.border--silver.border-top (:content (first posts))]]
 
-    ]))
+
 
 (defn with-top-nav [& contents]
   (base
