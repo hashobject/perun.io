@@ -73,7 +73,7 @@
     [:head
      [:meta {:charset "utf-8"}]
      [:meta {:http-equiv "X-UA-Compatible" :content "IE=edge,chrome=1"}]
-     [:title "perun: composable static site generator build with Clojure and Boot"]
+     [:title "perun: composable static site generator build with clojure and boot"]
      [:meta {:name "viewport" :content "width=device-width, initial-scale=1.0, user-scalable=no"}]
      [:meta {:itemprop "author" :name "author" :content "Anton Podviaznikov, Martin Klepsch, Juho Teperi, Brent Hagany & other contributors"}]
      [:link {:rel "icon" :type "image/png" :href "/images/48.png" :sizes "48x48"}]
